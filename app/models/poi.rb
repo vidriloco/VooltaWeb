@@ -10,7 +10,9 @@ class Poi < ActiveRecord::Base
   before_validation :update_coordinates
   after_save :update_trip
   
-  validates :poi_kind, :image, :title, :details, :trip, :mode, :lat, :lon, presence: true
+  validates :poi_kind, :title, :details, :trip, :mode, :lat, :lon, presence: true
+  
+  validates :image, presence: true, :unless => Proc.new { |poi| poi.is_small? }
   
   rails_admin do         
     edit do
@@ -20,6 +22,22 @@ class Poi < ActiveRecord::Base
       field :lat
       field :lon
     end
+    
+    list do
+      field :id
+      field :title
+      field :trip_name
+      field :listed
+      field :sponsored
+    end
+  end
+  
+  def trip_name
+    trip.full_name
+  end
+  
+  def is_small?
+    self.mode == "small"
   end
   
   def mode_enum
@@ -41,6 +59,11 @@ class Poi < ActiveRecord::Base
   end
   
   protected
+  
+  def image_if_mode_is_not_small
+    
+  end
+  
   def update_coordinates
     self.coordinates = "POINT(#{self.lon.to_f} #{self.lat.to_f})"
   end

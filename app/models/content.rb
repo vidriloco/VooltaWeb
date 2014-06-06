@@ -14,6 +14,18 @@ class Content < ActiveRecord::Base
       
       field :html_string, :code_mirror
     end
+
+    list do
+      field :id
+      field :kind
+      field :order_in_contentable do
+        sortable :order
+      end
+    end
+  end
+  
+  def order_in_contentable
+    "#{order} : #{contentable_type} - #{contentable.title}"
   end
   
   def kind_enum

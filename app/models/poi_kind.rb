@@ -1,6 +1,8 @@
 class PoiKind < ActiveRecord::Base
   belongs_to :image
   
+  validates :content, :keyword, :lang, :image, presence: true
+  
   def lang_enum
     ["es", "en"]
   end

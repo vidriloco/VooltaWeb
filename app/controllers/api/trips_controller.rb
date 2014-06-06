@@ -13,7 +13,7 @@ class Api::TripsController < ActionController::Base
   end
   
   def inventory
-    @trips = Trip.all
+    @trips = Trip.all.order(updated_at: :desc).order(available: :desc)
     respond_with(@trips, :each_serializer => TripInventorySerializer)
   end
 end

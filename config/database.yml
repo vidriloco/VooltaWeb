@@ -15,7 +15,7 @@ test:
   username: postgres
 
 production:
-  database: hoop_pro
+  database: voolta
   adapter: postgis
   encoding: unicode
   username: spalatin

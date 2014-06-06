@@ -13,6 +13,10 @@ class Trip < ActiveRecord::Base
   before_validation :update_coordinates
   
   validates :trip_resource, presence: true
+  validates :details, length: { maximum: 105 }
+  
+  validates :distance, :title, :details, :complexity, :background_image, :main_image, :origin_lat, :origin_lon, :final_lat, :final_lon, presence: true
+  
   attr_accessor :origin_lat, :origin_lon, :final_lon, :final_lat
   
   rails_admin do         
@@ -24,6 +28,14 @@ class Trip < ActiveRecord::Base
       field :origin_lon
       field :final_lat
       field :final_lon
+    end
+    
+    list do
+      field :id
+      field :full_name
+      field :trip_resource
+      field :cost
+      field :available
     end
   end
   
@@ -52,6 +64,10 @@ class Trip < ActiveRecord::Base
     return @final_lon unless @final_lon.nil?
     end_coordinate.lon unless end_coordinate.nil?
   end
+      
+  def complexity_enum
+    ["Difícil", "Hard", "Media", "Medium", "Fácil", "Easy"]
+  end    
       
   def lang_enum
     ["es", "en"]
