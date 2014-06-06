@@ -1,5 +1,5 @@
 class TripSerializer < ActiveModel::Serializer
-  attributes :id, :title, :details, :distance, :complexity, :cost, :available, :start, :final, :trip_resource
+  attributes :id, :title, :details, :distance, :complexity, :cost, :available, :start, :final, :trip_resource, :updated_at
   has_one :main_image
   has_one :background_image
   has_many :paths
