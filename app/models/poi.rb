@@ -1,16 +1,18 @@
 class Poi < ActiveRecord::Base
+  has_and_belongs_to_many :trips, class_name: "Trip", join_table: :poi_trips
+  
   belongs_to :poi_category
   belongs_to :poi_kind
   belongs_to :image
-  belongs_to :trip
   has_many :contents, as: :contentable, :inverse_of => :contentable
   has_many :slides
   
   attr_accessor :lat, :lon
   before_validation :update_coordinates
-  after_save :update_trip
+  after_save :update_trips
   
-  validates :poi_kind, :title, :details, :trip, :mode, :lat, :lon, presence: true
+  validates :poi_kind, :title, :mode, :lat, :lon, presence: true
+  validates :details, presence: true, :if => Proc.new { |poi| poi.is_slide_based? }
   
   validates :image, presence: true, :unless => Proc.new { |poi| poi.is_small? }
   
@@ -25,19 +27,32 @@ class Poi < ActiveRecord::Base
     
     list do
       field :id
+      field :lang
       field :title
-      field :trip_name
+      field :listed_on_trips
       field :listed
       field :sponsored
     end
   end
   
-  def trip_name
-    trip.full_name
+  def listed_on_trips
+    trip_list = String.new
+    trips.each do |trip|
+      trip_list << "#{trip.full_name}, "
+    end
+    trip_list.chop.chop
+  end
+  
+  def lang
+    trips.first.lang
   end
   
   def is_small?
     self.mode == "small"
+  end
+  
+  def is_slide_based?
+    self.mode == "slide_based"
   end
   
   def mode_enum
@@ -54,15 +69,13 @@ class Poi < ActiveRecord::Base
     coordinates.lon unless coordinates.nil?
   end
   
-  def update_trip
-    trip.update_checksum && trip.save
+  def update_trips
+    trips.each do |trip|
+      trip.update_checksum && trip.save
+    end
   end
   
   protected
-  
-  def image_if_mode_is_not_small
-    
-  end
   
   def update_coordinates
     self.coordinates = "POINT(#{self.lon.to_f} #{self.lat.to_f})"

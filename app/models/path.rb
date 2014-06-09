@@ -1,13 +1,24 @@
 class Path < ActiveRecord::Base
-  has_and_belongs_to_many :trips
+  has_and_belongs_to_many :trips, class_name: "Trip", join_table: :path_trips
   
   after_save :update_trip_checksum
   
   rails_admin do         
     list do
       field :id
+      field :name
+      field :listed_on_trips
       field :trip_name
     end
+  end
+  
+  def listed_on_trips
+    return nil if trips.empty? 
+    trip_list = String.new
+    trips.each do |trip|
+      trip_list << "#{trip.full_name}, "
+    end
+    trip_list.chop.chop
   end
   
   def trip_name
@@ -21,5 +32,9 @@ class Path < ActiveRecord::Base
     trips.each do |trip|
       trip.update_checksum && trip.save
     end
+  end
+  
+  def transform_coordinates
+    self.coordinates_vector.gsub(',0', '|').gsub(',', ' ').gsub('|', ' , ')
   end
 end

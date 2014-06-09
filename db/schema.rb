@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140529040059) do
+ActiveRecord::Schema.define(version: 20140609054723) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,20 +58,19 @@ ActiveRecord::Schema.define(version: 20140529040059) do
     t.datetime "updated_at"
   end
 
+  create_table "path_trips", id: false, force: true do |t|
+    t.integer "path_id"
+    t.integer "trip_id"
+  end
+
   create_table "paths", force: true do |t|
     t.integer  "thickness"
     t.string   "color"
     t.text     "coordinates_vector"
     t.string   "name"
     t.string   "details"
-    t.integer  "trip_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "paths_trips", id: false, force: true do |t|
-    t.integer "path_id"
-    t.integer "trip_id"
   end
 
   create_table "poi_categories", force: true do |t|
@@ -92,6 +91,11 @@ ActiveRecord::Schema.define(version: 20140529040059) do
     t.datetime "updated_at"
   end
 
+  create_table "poi_trips", id: false, force: true do |t|
+    t.integer "poi_id"
+    t.integer "trip_id"
+  end
+
   create_table "pois", force: true do |t|
     t.integer  "poi_category_id"
     t.integer  "poi_kind_id"
@@ -101,7 +105,6 @@ ActiveRecord::Schema.define(version: 20140529040059) do
     t.integer  "image_id"
     t.string   "details"
     t.string   "title"
-    t.integer  "trip_id"
     t.string   "mode"
     t.boolean  "published"
     t.datetime "created_at"

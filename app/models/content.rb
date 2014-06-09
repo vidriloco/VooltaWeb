@@ -17,11 +17,16 @@ class Content < ActiveRecord::Base
 
     list do
       field :id
+      field :lang
       field :kind
       field :order_in_contentable do
         sortable :order
       end
     end
+  end
+  
+  def lang
+    contentable.lang
   end
   
   def order_in_contentable
@@ -39,6 +44,6 @@ class Content < ActiveRecord::Base
   protected 
   def update_trip_checksum
     (contentable.update_checksum && contentable.save) if(contentable_type == Trip.to_s)
-    contentable.update_trip if(contentable_type == Poi.to_s)
+    contentable.update_trips if(contentable_type == Poi.to_s)
   end
 end

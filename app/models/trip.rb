@@ -1,8 +1,9 @@
 #encoding: utf-8
 class Trip < ActiveRecord::Base  
-  has_and_belongs_to_many :paths
+  has_and_belongs_to_many :paths, class_name: "Path", join_table: :path_trips
+  has_and_belongs_to_many :pois, class_name: "Poi", join_table: :poi_trips
+  
   has_many :contents, as: :contentable, :inverse_of => :contentable
-  has_many :pois
   
   belongs_to :main_image, class_name: 'Image', foreign_key: 'main_image_id'
   belongs_to :background_image, class_name: 'Image', foreign_key: 'background_image_id'
@@ -13,7 +14,6 @@ class Trip < ActiveRecord::Base
   before_validation :update_coordinates
   
   validates :trip_resource, presence: true
-  validates :details, length: { maximum: 105 }
   
   validates :distance, :title, :details, :complexity, :background_image, :main_image, :origin_lat, :origin_lon, :final_lat, :final_lon, presence: true
   
@@ -32,6 +32,7 @@ class Trip < ActiveRecord::Base
     
     list do
       field :id
+      field :lang
       field :full_name
       field :trip_resource
       field :cost
@@ -73,8 +74,12 @@ class Trip < ActiveRecord::Base
     ["es", "en"]
   end
   
+  def name
+    full_name
+  end
+  
   def full_name
-    title.concat(' - ').concat(lang)
+    "#{title} - #{lang}"
   end
   
   def update_checksum

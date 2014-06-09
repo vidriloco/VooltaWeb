@@ -12,7 +12,7 @@ class TripSerializer < ActiveModel::Serializer
   
   def pois
       object.pois.where(published: true)
-    end
+  end
   
   def start
     return { lat: 0, lon: 0 } if object.origin_coordinate.nil?
