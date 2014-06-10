@@ -44,6 +44,7 @@ class Poi < ActiveRecord::Base
   end
   
   def lang
+    return nil if trips.empty?
     trips.first.lang
   end
   
