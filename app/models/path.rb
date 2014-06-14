@@ -3,6 +3,8 @@ class Path < ActiveRecord::Base
   
   after_save :update_trip_checksum
   
+  before_save :transform_coordinates
+  
   rails_admin do         
     list do
       field :id
@@ -35,6 +37,8 @@ class Path < ActiveRecord::Base
   end
   
   def transform_coordinates
-    self.coordinates_vector.gsub(',0', '|').gsub(',', ' ').gsub('|', ' , ')
+    if self.coordinates_vector[0] == "R"
+      self.coordinates_vector = self.coordinates_vector.gsub(',0','|').gsub(',',' ').gsub('|', ' , ').chop.chop.chop.gsub("R ", '')
+    end
   end
 end
