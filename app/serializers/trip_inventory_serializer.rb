@@ -1,4 +1,4 @@
-class TripInventorySerializer < ActiveModel::Serializer
+class TripInventorySerializer < ActiveModel::Serializer  
   attributes :id, :checksum, :lang, :trip_resource
   
   def trip_resource

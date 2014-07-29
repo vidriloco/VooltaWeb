@@ -9,7 +9,8 @@ class Api::ImagesController < ActionController::Base
   end
   
   def inventory
-    @images = Image.where(:image_type => ["background", "icon"])
-    respond_with(@images, :each_serializer => ImageInventorySerializer)
+    render json: Image.cached_inventory
+    #@images = Image.where(:image_type => ["background", "icon"])
+    #respond_with(@images, :each_serializer => ImageInventorySerializer)
   end
 end

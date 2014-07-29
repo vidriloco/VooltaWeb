@@ -83,7 +83,8 @@ class Trip < ActiveRecord::Base
   end
   
   def update_checksum
-    self.checksum = Digest::SHA256.hexdigest(TripSerializer.new(self).to_json) 
+    self.precompiled_json = TripSerializer.new(self).to_json
+    self.checksum = Digest::SHA256.hexdigest(self.precompiled_json) 
   end
   
   protected

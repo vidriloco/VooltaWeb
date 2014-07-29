@@ -11,6 +11,17 @@ class Image < ActiveRecord::Base
   validates :url, uniqueness: true
   
   before_save       :update_checksum
+  after_save        :regenerate_cache
+  
+  @@precompiled_json=nil
+  def self.regenerate_cache_inventory
+    @@precompiled_json = ActiveModel::ArraySerializer.new(Image.where(:image_type => ["background", "icon"]), each_serializer: ImageInventorySerializer).to_json
+  end
+  
+  def self.cached_inventory
+    Image.regenerate_cache_inventory if @@precompiled_json.nil?
+    @@precompiled_json
+  end
   
   def image_type_enum
     ["background", "icon", "photo"]
@@ -26,6 +37,12 @@ class Image < ActiveRecord::Base
   end
   
   protected
+  
+  def regenerate_cache
+    if self.image_type.in?(["background", "icon"])
+      Image.regenerate_cache_inventory
+    end
+  end
   
   def update_checksum
     self.checksum = Digest::SHA256.hexdigest(ImageSerializer.new(self).to_json) 

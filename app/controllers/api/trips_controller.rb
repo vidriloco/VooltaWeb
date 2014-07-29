@@ -8,7 +8,7 @@ class Api::TripsController < ActionController::Base
     if @trip.nil?
       respond_with(@trip, :serializer => TripSerializer, :status => :not_found)
     else
-      respond_with(@trip, :serializer => TripSerializer)
+      render json: @trip.precompiled_json
     end
   end
   

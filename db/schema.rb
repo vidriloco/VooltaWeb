@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140609054723) do
+ActiveRecord::Schema.define(version: 20140712112004) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -96,81 +96,3 @@ ActiveRecord::Schema.define(version: 20140609054723) do
     t.integer "trip_id"
   end
 
-  create_table "pois", force: true do |t|
-    t.integer  "poi_category_id"
-    t.integer  "poi_kind_id"
-    t.boolean  "listed"
-    t.boolean  "sponsored"
-    t.spatial  "coordinates",     limit: {:srid=>4326, :type=>"point", :geographic=>true}
-    t.integer  "image_id"
-    t.string   "details"
-    t.string   "title"
-    t.string   "mode"
-    t.boolean  "published"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "slides", force: true do |t|
-    t.string   "title"
-    t.string   "subtitle"
-    t.text     "url"
-    t.integer  "image_id"
-    t.boolean  "aligned_to_right"
-    t.boolean  "main_slide"
-    t.boolean  "contrasted"
-    t.integer  "order"
-    t.integer  "poi_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "slides", ["order", "poi_id"], :name => "index_slides_on_order_and_poi_id"
-
-  create_table "trip_resources", force: true do |t|
-    t.string   "identifier"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "trips", force: true do |t|
-    t.integer  "trip_resource_id"
-    t.string   "distance"
-    t.string   "title"
-    t.string   "details"
-    t.string   "complexity"
-    t.integer  "background_image_id"
-    t.integer  "cost",                                                                         default: 0
-    t.boolean  "available"
-    t.integer  "main_image_id"
-    t.integer  "user_id"
-    t.string   "lang"
-    t.spatial  "origin_coordinate",   limit: {:srid=>4326, :type=>"point", :geographic=>true}
-    t.spatial  "end_coordinate",      limit: {:srid=>4326, :type=>"point", :geographic=>true}
-    t.text     "checksum"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "users", force: true do |t|
-    t.string   "full_name"
-    t.string   "username"
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
-  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
-  add_index "users", ["username"], :name => "index_users_on_username", :unique => true
-
-end
