@@ -31,17 +31,31 @@ class Trip < ActiveRecord::Base
     end
     
     list do
-      field :id
       field :lang
       field :full_name
       field :trip_resource
-      field :cost
       field :available
+      field :staging
+      field :published_on_lite_version
+    end
+  end
+  
+  def self.find_all_with(publishing_mode)
+    # Shows all trips: staging, the ones for the lite version and for the pro versions as well
+    if(publishing_mode == :staging)
+      all.order(updated_at: :desc).order(available: :desc)
+    # Shows all trips on lite which are not staging
+    elsif(publishing_mode == :lite)
+      all.order(updated_at: :desc).order(available: :desc).where(:published_on_lite_version => true, :staging => false)
+    # Shows all trips on pro which are not staging
+    else
+      all.order(updated_at: :desc).order(available: :desc).where(:staging => false)
     end
   end
   
   def self.find_trip_with_id(id)
     find(id)
+    
     rescue ActiveRecord::RecordNotFound
       return nil
   end

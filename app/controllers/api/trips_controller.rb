@@ -5,6 +5,7 @@ class Api::TripsController < ActionController::Base
   
   def show
     @trip = Trip.find_trip_with_id(params[:id])
+    
     if @trip.nil?
       respond_with(@trip, :serializer => TripSerializer, :status => :not_found)
     else
@@ -13,7 +14,7 @@ class Api::TripsController < ActionController::Base
   end
   
   def inventory
-    @trips = Trip.all.order(updated_at: :desc).order(available: :desc)
+    @trips = Trip.find_all_with(params[:publishing_mode])
     respond_with(@trips, :each_serializer => TripInventorySerializer)
   end
 end
