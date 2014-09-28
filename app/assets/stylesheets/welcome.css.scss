@@ -1,0 +1,226 @@
+// Place all the styles related to the welcome controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+body {
+	background: url('/assets/background.jpg') !important; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+}
+
+#phone-carousel {
+	width: 40%;
+	text-align: center;	
+	img {
+		width: 80%;
+	}
+}
+
+.container {
+	
+	margin-top: 40px;
+	width: 65%;
+	margin-left: auto;
+	margin-right: auto;
+
+	
+	> div {
+		display: inline-block !important;
+	}
+	
+	.content {
+		vertical-align: top;
+		text-align: center;
+		width: 55%;
+		
+		h1, h3 {
+			width: 90%;
+		}
+		
+		.logo {
+			width: 70%;
+			margin-top: 5%;
+		}
+		
+		.appstore {
+			margin: 30px;
+		}
+		
+		h1 {
+			font-size: 20pt;
+			text-align: center;	
+			margin-left: auto;
+			margin-right: auto;
+			color: white;
+			font-family: 'infotextsemibold', sans-serif;
+			font-weight: 400;
+			span {
+				color: #ffcc00;
+			}
+		}
+		
+		ul {
+			margin-left: 0px;
+			padding-left: 0px;
+		}
+		
+		ul.features {
+			margin-top: 30px;
+			font-family: 'infotextnormal', sans-serif;
+			color: white;
+			font-weight: 100;
+			text-transform: uppercase;
+			list-style: none;
+			text-align: center;	
+			font-size: 18px;
+			li {
+				opacity: 0.3;
+				display: inline-block;
+				margin-right: 10px;
+			}
+			
+			li.emph {
+				opacity: 0.8 !important;
+				color: #FFDD4D;
+			}
+			
+			li.text {
+				opacity: 1 !important;
+			}
+		}
+		
+		div.showcase {
+			font-family: 'infotextnormal', sans-serif;
+			color: white;
+			width: 80%;
+			margin-left: auto;
+			margin-right: auto;
+			
+			.title {
+				text-transform: uppercase;
+				opacity: 1 !important;
+				margin-bottom: 10px;
+				font-size: 12px;
+			}
+			
+			p {
+				padding: 0;
+				margin: 0;
+			}
+			
+			.trips {
+				line-height: 20px;
+				
+				.left-sided {
+					p {
+						text-align: left;
+					}
+					
+					img {
+						margin-right: 10px;
+					}
+				}
+				
+				.right-sided {
+					p {
+						text-align: right;
+					}
+					
+					img {
+						margin-left: 10px;
+					}
+				}
+				
+				.item {
+					vertical-align: middle !important;
+					margin: 10px;
+					font-size: 20px;
+					
+					img, p {
+						display: inline-block;
+					}
+					
+					img {
+						width: 50px;
+						vertical-align: middle;
+					}
+					
+					p {
+						width: 70%;
+						vertical-align: middle;
+					}
+					
+					.rotate-minus-5 {
+						-ms-transform: rotate(5deg); 
+						-webkit-transform: rotate(5deg); 
+						transform: rotate(5deg);
+					}
+					
+					.rotate-5 {
+						-ms-transform: rotate(-5deg); 
+						-webkit-transform: rotate(-5deg); 
+						transform: rotate(-5deg);
+					}
+					
+					.venue {
+						color: #FFDD4D;
+						font-size: 14px;
+						text-transform: uppercase;
+					}
+					
+					.emph {
+						color: #9FFFD5;
+					}
+				}
+			}
+		}
+		
+		ul.share {
+			margin-top: 10px;
+			background-color: rgba(0,0,0,0.1);
+			border-radius: 5px;
+			list-style: none;
+			width: 80%;
+			margin-left: auto;
+			margin-right: auto;
+			
+			li {
+				display: inline-block;
+				color: white;
+				font-family: 'infotextnormal', sans-serif;
+				text-align: left ;
+				margin: 10px 10px 6px 10px;
+				span {
+					a {
+						color: #ffcc00;
+						text-decoration: none;
+					}
+					margin-left: 10px;
+					vertical-align: 10px;
+				}
+				
+				img {
+					width: 35px;
+					height: 35px;
+				}
+			}
+		}
+		
+		.row {
+			margin-top: 20px;
+			
+			img {
+				margin: 0px !important;
+			}
+		}
+		
+	}
+}
+
+
+
