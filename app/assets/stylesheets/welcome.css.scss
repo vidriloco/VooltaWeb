@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 body {
-	background: asset-url('/assets/background.jpg') !important; 
+	background: asset-url('background.jpg') !important; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -23,13 +23,11 @@ body {
 }
 
 .container {
-	
 	margin-top: 40px;
 	width: 65%;
 	margin-left: auto;
 	margin-right: auto;
 
-	
 	> div {
 		display: inline-block !important;
 	}
