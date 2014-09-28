@@ -15,7 +15,7 @@ $(document).ready(function() {
 		pagination: false,
 		singleItem: true,
 		transitionStyle : "fade",
-		autoPlay: 3000
+		autoPlay: 4000
 	});
 	
 });
