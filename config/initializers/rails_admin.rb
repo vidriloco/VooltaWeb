@@ -6,6 +6,11 @@ RailsAdmin.config do |config|
   config.authenticate_with do
     warden.authenticate! scope: :user
   end
+
+  config.navigation_static_links = {
+    'Recorridos' => '/trips-admin'
+  }
+  
   config.current_user_method(&:current_user)
 
   ## == Cancan ==

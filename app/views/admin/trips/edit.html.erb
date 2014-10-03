@@ -1,0 +1,17 @@
+<h4>Editando <%= @trip.title %></h4>
+
+<%= form_for @trip, url: trips_admin_update_path(@trip), method: 'put' do |t| %>
+	<%= t.label :lang %>
+	<%= t.text_field :lang %>
+	<br/>
+	<%= t.label :title %>
+	<%= t.text_field :title %>
+	<br/>
+	<%= t.label :details %>
+	<%= t.text_area :details %>
+	<br/>
+	<%= t.label :cost %>
+	<%= t.text_field :cost %>
+	<br/>
+	<%= t.submit %>
+<% end %>

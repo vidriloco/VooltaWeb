@@ -1,0 +1,193 @@
+.card {
+	font-family: 'Open Sans Condensed', sans-serif;
+	
+	background-color: white;
+	width: 40%;
+	margin-left: auto;
+	margin-right: auto;
+	border:  1px solid #DBDBDB;
+	padding: 5px 15px;
+	color: #555;
+	
+	.toggler {
+		a {
+			text-decoration: none;
+		}
+		margin-top: 5px !important;
+		font-size: 13px;
+		text-align: right;
+	}
+	
+	.hoverable {
+		padding: 5px !important;
+	}
+	
+	.hoverable:hover {
+		background-color: #E4E4E4;
+	}
+	
+	.card > .details:hover {
+		background-color: #F2F2F2;
+	}
+	
+	.fieldset {
+		display: none;
+		background-color: #F0FCFF;
+		padding: 20px;
+		width: 90%;
+		margin-top: 20px;
+		margin-bottom: 20px;
+		margin-left: auto;
+		margin-right: auto;
+		font-size: 15px;
+		
+		.main-title {
+			font-weight: bold;
+			padding: 0;
+			margin-top: 10px;
+			margin-bottom: 5px;
+		}
+		
+		.field {
+			padding: 5px;
+
+			> .title {
+				margin-left: 5px;
+				display: inline-block;
+				width: 45%;
+			}
+			
+			.input {
+				padding: 5px;
+				width: 45%;
+			}
+		}
+		
+		.submit {
+			margin-top: 30px;
+			text-align: center;
+		}
+	}
+	
+
+	
+	.actions {
+		list-style: none;
+		margin: 10px 0;
+		padding: 0;
+		li {
+			display: inline-block;
+			a {
+				text-decoration: none;
+			}
+		}
+	}
+	
+	.header {
+		background-color: #F4F4F4;
+		color: #6A6A6A;
+		padding: 5px;
+		
+		> div {
+			width: 49%;
+			display: inline-block;
+		}
+		
+		.creator p {
+			text-align: right;
+		}
+		
+		h3, p {
+			margin: 0;
+			padding: 0;
+		}
+	}
+	
+	.sub-header {
+		
+		font-size: 12px;
+		ul {
+			margin: 0 !important;
+			padding: 10px;
+			list-style: none;
+			
+			li {
+				display: inline-block;
+				margin-right: 20px;
+			}
+		}
+
+	}
+	
+	.details {
+		text-align: center;
+		padding: 20px;
+		margin-top: 20px;
+		margin-bottom: 20px;
+	}
+	
+	.table {
+		border-top: 5px solid #284362;
+		padding: 10px;
+		background-color: #F7F7F7;
+		
+		.section {
+			margin: 10px 0 10px 5px;
+			color: #707070;
+			font-size: 12px;
+			text-transform: uppercase;
+			font-weight: bold;
+		}
+		
+		.row {
+			padding: 5px;
+			
+			.section-title {
+				font-weight: bold;
+				
+			}
+			
+			> div {
+				width: 45%;
+				display: inline-block;
+			}
+		}
+		
+		.path, .poi {
+			margin-left: 0px;
+			padding: 5px;
+			
+			p {
+				font-size: 14px;
+				margin: 2px;
+				padding: 0;
+				
+				.status {
+					text-transform: uppercase;
+					font-size: 10px;
+				}
+				
+				.kind {
+					font-weight: bold;
+				}
+			}
+			
+			.details {
+				font-size: 12px;
+				text-align: left;
+			}
+			
+			.title, .details {
+				margin: 0;
+				padding: 0;
+			}
+		}
+	}
+}
+
+#map {
+	margin-top: 10px;
+	height: 180px;
+	width: 100%;
+}
+

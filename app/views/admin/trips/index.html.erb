@@ -1,0 +1,14 @@
+<h2>Recorridos</h2>
+
+<%= link_to 'Añadir Categoría de Recorrido', 'admin/trip_resource/new' %>
+
+<% @trip_resources.each do |trip_resource| %>
+	<div id="trip-<%= trip_resource.id %>">
+		<h4><%= trip_resource.identifier %></h4>		
+		<ul>
+			<% trip_resource.trips.each do |trip| %>
+				<li><%= link_to "#{trip.title} - #{trip.lang}", trips_admin_path(trip) %></li>
+			<% end %>
+		</ul>
+	</div>
+<% end %>

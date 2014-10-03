@@ -1,0 +1,117 @@
+<div class="card">
+	<ul class="actions">
+		<li><%= link_to 'Atrás', :back %></li>
+		<li><%= link_to 'Editar', trips_admin_edit_path(@trip) %></li>
+	</ul>
+	
+	<div class="header">
+		<div class="title">
+			<h3 class="hoverable"><%= @trip.title %> - <%= @trip.lang %></h3> 
+		</div>
+		<div class="creator">
+			<p class="hoverable"><b>por </b> <%= @trip.user.full_name %></p>
+		</div>
+	</div>
+	
+	<div class="sub-header">
+		<div id="map"></div>
+		<div class="coordinates">
+			<div class="toggler">
+				<%= link_to 'Editar coordenadas', 'javascript:void(0)', :class => 'edit-field', 'data-form' => 'coordinates' %>
+			</div>
+			<div class="fieldset" id="coordinates-form">
+				<%= form_for @trip, url: :trips_admin, :method => :update do |f| %>
+					<p class="main-title">Origen</p>
+					<div class="field">
+						<%= f.label :origin_lat, 'Latitud', :class => 'title' %>
+						<%= f.text_field :origin_lat, id: 'trip-origin-lat', :class => 'input' %>
+					</div>
+					<div class="field">
+						<%= f.label :origin_lon, 'Longitud', :class => 'title' %>
+						<%= f.text_field :origin_lon, id: 'trip-origin-lon', :class => 'input' %>
+					</div>
+				
+					<p class="main-title">Final</p>
+					<div class="field">
+						<%= f.label :final_lat, 'Latitud', :class => 'title' %>
+						<%= f.text_field :final_lat, id: 'trip-final-lat', :class => 'input' %>
+					</div>
+					<div class="field">
+						<%= f.label :final_lon, 'Longitud', :class => 'title' %>
+						<%= f.text_field :final_lon, id: 'trip-final-lon', :class => 'input' %>
+					</div>
+					<div class="submit">
+						<%= link_to 'Cancelar', 'javascript:void(0)', :class => 'hide-field', 'data-form' => 'coordinates' %> <%= f.submit 'Guardar cambios' %>
+					</div>
+				<% end %>
+			</div>
+		</div>
+	</div>
+	
+	<div id="details-field" class="details hoverable edit-field" data-form="details"><%= @trip.details %></div>
+	<div class="fieldset" id="details-form">
+		<%= form_for @trip, url: :trips_admin, :method => :update do |f| %>
+			<%= f.text_area :details, :class => 'input', :rows => 3, :cols => 75 %>
+			
+			<div class="submit">
+				<%= link_to 'Cancelar', 'javascript:void(0)', :class => 'hide-field', 'data-form' => 'details' %> <%= f.submit 'Guardar cambios' %>
+			</div>
+		<% end %>
+	</div>
+	
+
+	<div class="table">
+		<div class="section">Características</div>
+		<div class="row hoverable">
+			<div class="section-title">Complejidad</div>
+			<div class="section-details"><%= @trip.complexity %></div>
+		</div>
+		
+		<div class="row hoverable">
+			<div class="section-title">Fondo para el recorrido</div>
+			<div class="section-details"><%= @trip.background_image.name %></div>
+		</div>
+		
+		<div class="row hoverable">
+			<div class="section-title">Imagen Principal</div>
+			<div class="section-details"><%= @trip.main_image.name %></div>
+		</div>
+		
+		<div class="section">Estado en AppStore</div>
+		
+		<div class="row hoverable">
+			<div class="section-title">Costo</div>
+			<div class="section-details"><%= @trip.cost %> MXN</div>
+		</div>
+		
+		<div class="row hoverable">
+			<div class="section-title">Publicado</div>
+			<div class="section-details"><%= @trip.staging ? t('options.yes') : t('options.no') %></div>
+		</div>
+		
+		<div class="row hoverable">
+			<div class="section-title">Disponible en version lite</div>
+			<div class="section-details"><%= @trip.published_on_lite_version ? t('options.yes') : t('options.no') %></div>
+		</div>
+	</div>
+	<br/>
+	<div class="table">
+		<div class="section">Trazos (<%= @trip.paths.count %>)</div>
+		<% @trip.paths.each do |path| %>
+			<div class="path">
+				<p class="title"><%= path.name %></p>
+				<p class="details"><%= path.details.blank? ? "---" : path.details %></p>
+			</div>
+			
+		<% end %>
+	</div>	
+	<br/>
+	<div class="table">
+		<div class="section">Pois (<%= @trip.pois.count %>)</div>
+		<% @trip.pois.each do |poi| %>
+			<div class="poi">
+				<p><span class="status"><%= poi.published ? 'Publicado' : 'Sin publicar' %> </span><%= poi.title %> - <span class="kind"><%= poi.poi_kind.keyword %></span></p>
+			</div>
+		<% end %>
+	</div>
+</div>
