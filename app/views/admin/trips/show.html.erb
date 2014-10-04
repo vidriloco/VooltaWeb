@@ -1,15 +1,23 @@
+<% unless flash[:notice].blank? %>
+	<div class="notice dismissable"><%= flash[:notice] %></div>
+<% end %>
+<% unless flash[:alert].blank? %>
+	<div class="alert dismissable"><%= flash[:alert] %></div>
+<% end %>
+
 <div class="card">
 	<ul class="actions">
 		<li><%= link_to 'Atrás', :back %></li>
-		<li><%= link_to 'Editar', trips_admin_edit_path(@trip) %></li>
 	</ul>
 	
 	<div class="header">
 		<div class="title">
-			<h3 class="hoverable"><%= @trip.title %> - <%= @trip.lang %></h3> 
+			<h3 id="title-and-lang-field" class="hoverable edit-field" data-form="title-and-lang"><%= @trip.title %> - <%= @trip.lang %></h3> 
+			<%= render 'admin/trips/fields/title_and_lang' %>
 		</div>
 		<div class="creator">
-			<p class="hoverable"><b>por </b> <%= @trip.user.full_name %></p>
+			<p id="creator-info-field" class="hoverable edit-field" data-form="creator-info"><b>por </b> <%= @trip.user.full_name %></p>
+			<%= render 'admin/trips/fields/creator_info' %>
 		</div>
 	</div>
 	
@@ -17,82 +25,67 @@
 		<div id="map"></div>
 		<div class="coordinates">
 			<div class="toggler">
-				<%= link_to 'Editar coordenadas', 'javascript:void(0)', :class => 'edit-field', 'data-form' => 'coordinates' %>
+				<%= link_to 'Editar coordenadas', 'javascript:void(0)', :class => 'edit-field', id: 'coordinates-field', 'data-form' => 'coordinates' %>
 			</div>
-			<div class="fieldset" id="coordinates-form">
-				<%= form_for @trip, url: :trips_admin, :method => :update do |f| %>
-					<p class="main-title">Origen</p>
-					<div class="field">
-						<%= f.label :origin_lat, 'Latitud', :class => 'title' %>
-						<%= f.text_field :origin_lat, id: 'trip-origin-lat', :class => 'input' %>
-					</div>
-					<div class="field">
-						<%= f.label :origin_lon, 'Longitud', :class => 'title' %>
-						<%= f.text_field :origin_lon, id: 'trip-origin-lon', :class => 'input' %>
-					</div>
-				
-					<p class="main-title">Final</p>
-					<div class="field">
-						<%= f.label :final_lat, 'Latitud', :class => 'title' %>
-						<%= f.text_field :final_lat, id: 'trip-final-lat', :class => 'input' %>
-					</div>
-					<div class="field">
-						<%= f.label :final_lon, 'Longitud', :class => 'title' %>
-						<%= f.text_field :final_lon, id: 'trip-final-lon', :class => 'input' %>
-					</div>
-					<div class="submit">
-						<%= link_to 'Cancelar', 'javascript:void(0)', :class => 'hide-field', 'data-form' => 'coordinates' %> <%= f.submit 'Guardar cambios' %>
-					</div>
-				<% end %>
-			</div>
+			<%= render 'admin/trips/fields/coordinates' %>
 		</div>
 	</div>
 	
 	<div id="details-field" class="details hoverable edit-field" data-form="details"><%= @trip.details %></div>
-	<div class="fieldset" id="details-form">
-		<%= form_for @trip, url: :trips_admin, :method => :update do |f| %>
-			<%= f.text_area :details, :class => 'input', :rows => 3, :cols => 75 %>
-			
-			<div class="submit">
-				<%= link_to 'Cancelar', 'javascript:void(0)', :class => 'hide-field', 'data-form' => 'details' %> <%= f.submit 'Guardar cambios' %>
-			</div>
-		<% end %>
-	</div>
-	
+	<%= render 'admin/trips/fields/details' %>
 
 	<div class="table">
 		<div class="section">Características</div>
-		<div class="row hoverable">
+		<div id="distance-field" class="row hoverable edit-field" data-form="distance">
+			<div class="section-title">Distancia</div>
+			<div class="section-details"><%= @trip.distance %></div>
+		</div>
+		<%= render 'admin/trips/fields/distance' %>
+		
+		<div id="complexity-field" class="row hoverable edit-field" data-form="complexity">
 			<div class="section-title">Complejidad</div>
 			<div class="section-details"><%= @trip.complexity %></div>
 		</div>
+		<%= render 'admin/trips/fields/complexity' %>
 		
-		<div class="row hoverable">
+		<div id="background-field" class="row hoverable edit-field" data-form="background">
 			<div class="section-title">Fondo para el recorrido</div>
 			<div class="section-details"><%= @trip.background_image.name %></div>
 		</div>
+		<%= render 'admin/trips/fields/background' %>
 		
-		<div class="row hoverable">
-			<div class="section-title">Imagen Principal</div>
+		<div id="main-image-field" class="row hoverable edit-field" data-form="main-image">
+			<div class="section-title">Imagen de Portada</div>
 			<div class="section-details"><%= @trip.main_image.name %></div>
 		</div>
+		<%= render 'admin/trips/fields/main_image' %>
 		
 		<div class="section">Estado en AppStore</div>
 		
-		<div class="row hoverable">
-			<div class="section-title">Costo</div>
+		<div id="cost-field" class="row hoverable edit-field" data-form="cost">
+			<div class="section-title">Costo (Descontinuado)</div>
 			<div class="section-details"><%= @trip.cost %> MXN</div>
 		</div>
+		<%= render 'admin/trips/fields/cost' %>
 		
-		<div class="row hoverable">
-			<div class="section-title">Publicado</div>
-			<div class="section-details"><%= @trip.staging ? t('options.yes') : t('options.no') %></div>
+		<div id="published-field" class="row hoverable edit-field" data-form="published">
+			<div class="section-title">¿Es visible en la app?</div>
+			<div class="section-details"><%=  t('options')[@trip.staging] %></div>
 		</div>
+		<%= render 'admin/trips/fields/published' %>
 		
-		<div class="row hoverable">
+		<div id="lite-version-field" class="row hoverable edit-field" data-form="lite-version">
 			<div class="section-title">Disponible en version lite</div>
-			<div class="section-details"><%= @trip.published_on_lite_version ? t('options.yes') : t('options.no') %></div>
+			<div class="section-details"><%= t('options')[@trip.published_on_lite_version] %></div>
 		</div>
+		<%= render 'admin/trips/fields/lite_version' %>
+		
+		<div id="available-field" class="row hoverable edit-field" data-form="available">
+			<div class="section-title">Publicada y Disponible</div>
+			<div class="section-details"><%= t('options')[@trip.available] %></div>
+		</div>
+		<%= render 'admin/trips/fields/available' %>
+		
 	</div>
 	<br/>
 	<div class="table">

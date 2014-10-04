@@ -18,8 +18,6 @@ $(document).ready(function() {
 		autoPlay: 4000
 	});
 	
-	mixpanel.track("Visit");
-	
 	if($.isDefined('#map')) {		
 		
 		var origin = new google.maps.LatLng(parseFloat($('#trip-origin-lat').val()), parseFloat($('#trip-origin-lon').val()));
@@ -59,4 +57,17 @@ $(document).ready(function() {
 		$('#'+dataForm+'-form').fadeOut();
 	});
 	
+	$('.dismissable').bind('click', function() {
+		$(this).fadeOut();
+	});
+	
+	if($.isDefined('.notice') || $.isDefined('.alert')) {
+		setTimeout(function() {
+			$('.dismissable').click();
+		}, 4000);
+	}
+	
+	if($.isDefined('#mixpanel')) {
+		mixpanel.track("Visit");
+	}
 });

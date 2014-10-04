@@ -1,0 +1,10 @@
+<div class="fieldset" id="lite-version-form">
+	<p class="main-title">Disponible en version lite</p>
+	<%= form_for @trip, url: :trips_admin_update, :method => :put do |f| %>
+		<%= f.check_box :published_on_lite_version, :class => 'input' %>
+	
+		<div class="submit">
+			<%= link_to 'Cancelar', 'javascript:void(0)', :class => 'hide-field', 'data-form' => 'lite-version' %> <%= f.submit 'Guardar cambios' %>
+		</div>
+	<% end %>
+</div>

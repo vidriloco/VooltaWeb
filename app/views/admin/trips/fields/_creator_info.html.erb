@@ -1,0 +1,13 @@
+<div class="fieldset" id="creator-info-form">
+	<p class="main-title">Datos sobre el creador de la ruta</p>
+	<%= form_for @trip.user, url: users_admin_update_path(@trip.user), :method => :put do |f| %>
+		<%= f.text_field :full_name, :class => 'input',  placeholder: 'Nombre completo' %>
+		<%= f.text_field :username, :class => 'input', placeholder: 'Nombre de usuario' %>
+		<%= f.text_field :email, :class => 'input', placeholder: 'Correo' %>
+		<%= f.hidden_field :trip_id, :value => @trip.id %>
+		
+		<div class="submit">
+			<%= link_to 'Cancelar', 'javascript:void(0)', :class => 'hide-field', 'data-form' => 'creator-info' %> <%= f.submit 'Guardar cambios' %>
+		</div>
+	<% end %>
+</div>

@@ -1,0 +1,10 @@
+<div class="fieldset" id="available-form">
+	<p class="main-title">¿Publicada y disponible?</p>
+	<%= form_for @trip, url: :trips_admin_update, :method => :put do |f| %>
+		<%= f.check_box :available, :class => 'input' %>
+
+		<div class="submit">
+			<%= link_to 'Cancelar', 'javascript:void(0)', :class => 'hide-field', 'data-form' => 'available' %> <%= f.submit 'Guardar cambios' %>
+		</div>
+	<% end %>
+</div>

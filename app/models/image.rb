@@ -8,7 +8,8 @@ class Image < ActiveRecord::Base
   has_many :pois
   has_many :slides
   
-  validates :url, uniqueness: true
+  validates :url, uniqueness: true, on: :create
+  validates :url, presence: true
   
   before_save       :update_checksum
   after_save        :regenerate_cache
@@ -23,7 +24,7 @@ class Image < ActiveRecord::Base
     @@precompiled_json
   end
   
-  def image_type_enum
+  def self.image_type_enum
     ["background", "icon", "photo"]
   end
   

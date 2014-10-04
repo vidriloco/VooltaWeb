@@ -19,4 +19,8 @@ HoopMan::Application.routes.draw do
   get '/trips-admin/:id' => 'admin/trips#show', as: 'trips_admin'
   put '/trips-admin/:id' => 'admin/trips#update', as: 'trips_admin_update'
   get '/trips-admin/:id/edit' => 'admin/trips#edit', as: 'trips_admin_edit'
+  
+  put '/users-admin/:id' => 'admin/users#update', as: 'users_admin_update'
+  put '/images-admin/:id' => 'admin/images#update', as: 'images_admin_update'
+  
 end

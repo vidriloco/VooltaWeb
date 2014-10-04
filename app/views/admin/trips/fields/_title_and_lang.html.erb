@@ -1,0 +1,11 @@
+<div class="fieldset" id="title-and-lang-form">
+	<p class="main-title">Datos principales de la ruta</p>
+	<%= form_for @trip, url: :trips_admin_update, :method => :put do |f| %>
+		<%= f.text_field :title, :class => 'input', placeholder: 'Titulo de la ruta' %>
+		Idioma <%= f.select :lang, Trip.lang_enum %>
+
+		<div class="submit">
+			<%= link_to 'Cancelar', 'javascript:void(0)', :class => 'hide-field', 'data-form' => 'title-and-lang' %> <%= f.submit 'Guardar cambios' %>
+		</div>
+	<% end %>
+</div>

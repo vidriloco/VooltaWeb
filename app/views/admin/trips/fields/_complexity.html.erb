@@ -1,0 +1,10 @@
+<div class="fieldset" id="complexity-form">
+	<p class="main-title">Complejidad</p>
+	<%= form_for @trip, url: :trips_admin_update, :method => :put do |f| %>
+		<%= f.select :complexity, Trip.complexity_enum[@trip.lang.to_sym] %>
+		
+		<div class="submit">
+			<%= link_to 'Cancelar', 'javascript:void(0)', :class => 'hide-field', 'data-form' => 'complexity' %> <%= f.submit 'Guardar cambios' %>
+		</div>
+	<% end %>
+</div>

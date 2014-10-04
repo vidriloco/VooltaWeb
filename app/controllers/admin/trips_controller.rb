@@ -16,16 +16,17 @@ class Admin::TripsController < ApplicationController
   
   def update
     if @trip.update_attributes(trip_params)
-      redirect_to trips_admin_path(@trip)
+      flash[:notice] = I18n.t('trips.update.success')
     else
-      render :action => 'edit'
+      flash[:alert] = I18n.t('trips.update.failure')
     end
+    redirect_to trips_admin_path(@trip)
   end
   
   protected
   
   def trip_params
-     params[:trip].permit(:title, :details, :cost, :lang)
+     params[:trip].permit(:title, :details, :cost, :lang, :complexity, :origin_lon, :origin_lat, :final_lat, :final_lon, :published_on_lite_version, :staging, :available, :distance)
   end
   
   def find_trip

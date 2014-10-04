@@ -1,4 +1,16 @@
 es_MX:
   options:
-    yes: "Sí"
-    no: "No"
+    true: "Sí"
+    false: "No"
+  trips:
+    update:
+      success: "Los datos de la ruta fueron actualizadados correctamente"
+      failure: "No fué posible actualizar los datos de la ruta"
+  users:
+    update:
+      success: "Los datos del usuario han sido actualizados correctamente"
+      failure: "No fué posible actualizar los datos del usuario"
+  images:
+    update:
+      success: "Los datos de la imagen han sido actualizados correctamente"
+      failure: "No fué posible actualizar los datos de la imagen"

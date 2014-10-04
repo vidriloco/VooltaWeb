@@ -1,0 +1,10 @@
+<div class="fieldset" id="distance-form">
+	<p class="main-title">Costo (Descontinuado)</p>
+	<%= form_for @trip, url: :trips_admin_update, :method => :put do |f| %>
+		<%= f.text_field :distance, :class => 'input', placeholder: 'Distancia' %>
+
+		<div class="submit">
+			<%= link_to 'Cancelar', 'javascript:void(0)', :class => 'hide-field', 'data-form' => 'distance' %> <%= f.submit 'Guardar cambios' %>
+		</div>
+	<% end %>
+</div>

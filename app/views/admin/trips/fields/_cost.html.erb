@@ -1,0 +1,10 @@
+<div class="fieldset" id="cost-form">
+	<p class="main-title">Costo (Descontinuado)</p>
+	<%= form_for @trip, url: :trips_admin_update, :method => :put do |f| %>
+		<%= f.text_field :cost, :class => 'input', placeholder: 'Costo' %>
+
+		<div class="submit">
+			<%= link_to 'Cancelar', 'javascript:void(0)', :class => 'hide-field', 'data-form' => 'cost' %> <%= f.submit 'Guardar cambios' %>
+		</div>
+	<% end %>
+</div>

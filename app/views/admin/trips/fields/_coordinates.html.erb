@@ -1,0 +1,15 @@
+<div class="fieldset" id="coordinates-form">
+	<%= form_for @trip, url: :trips_admin_update, :method => :put do |f| %>
+		<p class="main-title">Origen</p>
+		<%= f.text_field :origin_lat, id: 'trip-origin-lat', :class => 'input', placeholder: 'Latitud' %>
+		<%= f.text_field :origin_lon, id: 'trip-origin-lon', :class => 'input', placeholder: 'Longitud' %>
+	
+		<p class="main-title">Final</p>
+		<%= f.text_field :final_lat, id: 'trip-final-lat', :class => 'input', placeholder: 'Latitud' %>
+		<%= f.text_field :final_lon, id: 'trip-final-lon', :class => 'input', placeholder: 'Longitud' %>
+
+		<div class="submit">
+			<%= link_to 'Cancelar', 'javascript:void(0)', :class => 'hide-field', 'data-form' => 'coordinates' %> <%= f.submit 'Guardar cambios' %>
+		</div>
+	<% end %>
+</div>
