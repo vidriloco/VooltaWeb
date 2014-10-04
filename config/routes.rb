@@ -22,5 +22,5 @@ HoopMan::Application.routes.draw do
   
   put '/users-admin/:id' => 'admin/users#update', as: 'users_admin_update'
   put '/images-admin/:id' => 'admin/images#update', as: 'images_admin_update'
-  
+  put '/paths-admin/:id' => 'admin/paths#update', as: 'paths_admin_update'
 end

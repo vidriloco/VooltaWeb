@@ -87,24 +87,12 @@
 		<%= render 'admin/trips/fields/available' %>
 		
 	</div>
-	<br/>
-	<div class="table">
-		<div class="section">Trazos (<%= @trip.paths.count %>)</div>
-		<% @trip.paths.each do |path| %>
-			<div class="path">
-				<p class="title"><%= path.name %></p>
-				<p class="details"><%= path.details.blank? ? "---" : path.details %></p>
-			</div>
-			
-		<% end %>
-	</div>	
-	<br/>
-	<div class="table">
-		<div class="section">Pois (<%= @trip.pois.count %>)</div>
-		<% @trip.pois.each do |poi| %>
-			<div class="poi">
-				<p><span class="status"><%= poi.published ? 'Publicado' : 'Sin publicar' %> </span><%= poi.title %> - <span class="kind"><%= poi.poi_kind.keyword %></span></p>
-			</div>
-		<% end %>
-	</div>
+</div>
+	
+<div class="card">
+	<%= render partial: 'admin/paths/list', locals: { trip: @trip} %>	
+</div>
+
+<div class="card">
+	<%= render partial: 'admin/pois/list', locals: { trip: @trip} %>
 </div>

@@ -10,9 +10,11 @@ class CreatePaths < ActiveRecord::Migration
       t.timestamps
     end
     
-    create_table :paths_trips, id: false do |t|
+    create_table :path_trips, id: false do |t|
       t.belongs_to :path
       t.belongs_to :trip
     end
+    
+    add_index   :path_trips, [:path_id, :trip_id],  unique: true
   end
 end

@@ -61,6 +61,38 @@ $(document).ready(function() {
 		$(this).fadeOut();
 	});
 	
+	$('.map-hoverable').bind('mouseenter', function() {
+		var mapElement = $(this).children('.path-in-map')[0];
+		var mapName = $(mapElement).attr('id').concat('-map');
+		$(mapElement).html('<div id="'+ mapName +'" class="map"></div>');
+		var simpleMap = new google.maps.Map(document.getElementById(mapName), mapOptions);
+		
+		var coordinates = [];
+		var coordsVector = $(this).attr('data-path-coordinates').split(',');
+		
+		for(var i = 0 ; i < coordsVector.length ; i++) {
+			var coordinate = coordsVector[i].trim();
+			var lon = coordinate.split(' ')[0];
+			var lat = coordinate.split(' ')[1];
+			coordinates.push(new google.maps.LatLng(lat, lon));
+		}
+		
+	  var path = new google.maps.Polyline({
+	    path: coordinates,
+	    geodesic: true,
+	    strokeColor: '#'.concat($(this).attr('data-path-color')),
+	    strokeOpacity: 1.0,
+	    strokeWeight: $(this).attr('data-path-thickness')
+	  });
+		
+		path.setMap(simpleMap);
+	});
+	
+	$('.map-hoverable').bind('mouseleave', function() {
+		var mapElement = $(this).children('.path-in-map')[0];
+		$(mapElement).html('');
+	});
+	
 	if($.isDefined('.notice') || $.isDefined('.alert')) {
 		setTimeout(function() {
 			$('.dismissable').click();

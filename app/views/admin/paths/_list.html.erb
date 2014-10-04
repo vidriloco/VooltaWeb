@@ -1,0 +1,11 @@
+<ul class="actions">
+	<li><%= link_to 'Añadir nuevo', nil %></li> 
+	<li><%= link_to 'Ver lista', nil %></li>
+</ul>
+
+<div class="table">
+	<div class="section">Trazos (<%= trip.paths.count %>)</div>
+	<% trip.paths.each do |path| %>
+		<%= render path %>
+	<% end %>
+</div>

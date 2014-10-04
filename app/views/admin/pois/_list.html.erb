@@ -1,0 +1,13 @@
+<ul class="actions">
+	<li><%= link_to 'Añadir nuevo', nil %></li> 
+	<li><%= link_to 'Ver lista', nil %></li>
+</ul>
+
+<div class="table">
+	<div class="section">Pois (<%= trip.pois.count %>)</div>
+	<% trip.pois.each do |poi| %>
+		<div class="poi">
+			<p><span class="status"><%= poi.published ? 'Publicado' : 'Sin publicar' %> </span><%= poi.title %> - <span class="kind"><%= poi.poi_kind.keyword %></span></p>
+		</div>
+	<% end %>
+</div>

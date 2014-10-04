@@ -19,12 +19,10 @@
 }
 
 .card {
+	margin: 20px auto 20px auto;
 	font-family: 'Open Sans Condensed', sans-serif;
-	
 	background-color: white;
 	width: 40%;
-	margin-left: auto;
-	margin-right: auto;
 	border:  1px solid #DBDBDB;
 	padding: 5px 15px;
 	color: #555;
@@ -40,6 +38,16 @@
 	
 	.hoverable {
 		padding: 5px !important;
+		
+		.path-in-map {
+			width: 100% !important;
+			
+			.map {
+				margin: 10px 0 10px 0;
+				height: 200px;
+				width: 100% !important;
+			}
+		}
 	}
 	
 	.hoverable:hover {
@@ -102,6 +110,7 @@
 		margin: 10px 0;
 		padding: 0;
 		li {
+			margin-right: 10px;
 			display: inline-block;
 			a {
 				text-decoration: none;

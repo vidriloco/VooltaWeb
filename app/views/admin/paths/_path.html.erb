@@ -1,0 +1,23 @@
+<div class="fieldset" id="path-<%= path.id %>-form">
+	<p class="main-title">Editando <%= path.name %></p>
+	<%= form_for path, url: paths_admin_update_path(path), :method => :put do |f| %>
+		<%= f.text_field :name, :class => 'input', placeholder: 'Nombre' %>
+		<%= f.text_field :details, :class => 'input', placeholder: 'Detalles' %>
+		<%= f.text_field :thickness, :class => 'input', placeholder: 'Thickness' %>
+		<div style="background-color: #<%= path.color %>">
+			<%= f.text_field :color, :class => 'input', placeholder: 'Color' %>
+		</div>
+		<%= f.text_field :coordinates_vector, :class => 'input', placeholder: 'Vector' %>
+		<%= f.hidden_field :trip_id, :value => @trip.id %>
+		<div class="submit">
+			<%= link_to 'Cancelar', 'javascript:void(0)', :class => 'hide-field', 'data-form' => "path-#{path.id}" %> <%= f.submit 'Guardar cambios' %>
+		</div>
+	<% end %>
+</div>
+<div class="row path hoverable map-hoverable" data-path-coordinates="<%= path.coordinates_vector %>" data-path-color="<%= path.color %>" data-path-thickness="<%= path.thickness %>">
+	<div class=" edit-field" id="path-field" data-form="path-<%= path.id %>">
+		<p class="title"><%= path.name %></p>
+		<p class="details"><%= path.details.blank? ? "---" : path.details %></p>
+	</div>
+	<div class="path-in-map" id="path-<%= path.id %>-on-map"></div>
+</div>
