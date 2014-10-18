@@ -1,0 +1,82 @@
+<%= render partial: 'admin/shared/notifications' %>
+<div class="centered">
+	<h2>Detalles del Punto de interés</h2>
+</div>
+
+<div class="card">
+	<ul class="actions">
+		<li><%= link_to 'Atrás', :back %></li>
+	</ul>
+	
+	<div class="header">
+		<div class="title">
+			<h3 id="title-field" class="hoverable edit-field" data-form="title"><%= @poi.title %></h3> 
+			<%= render 'admin/pois/fields/title' %>
+		</div>
+	</div>
+	
+	<div class="sub-header">
+		<div id="map" class="for-poi"></div>
+		<div class="coordinates">
+			<div class="toggler">
+				<%= link_to 'Editar coordenadas', 'javascript:void(0)', :class => 'edit-field', id: 'coordinates-field', 'data-form' => 'coordinates' %>
+			</div>
+			<%= render 'admin/pois/fields/coordinates' %>
+		</div>
+	</div>
+	
+	<div id="details-field" class="details hoverable edit-field" data-form="details"><%= @poi.details.blank? ? "Sin detalles" : @poi.details %></div>
+	<%= render 'admin/pois/fields/details' %>
+
+	<div class="table">
+		<div class="section">Características</div>
+		<div id="listed-field" class="row hoverable edit-field" data-form="listed">
+			<div class="section-title">¿Listado en la portada del recorrido?</div>
+			<div class="section-details"><%= @poi.listed ? "Si" : "No" %></div>
+		</div>
+		<%= render 'admin/pois/fields/listed' %>
+		
+		<div id="sponsored-field" class="row hoverable edit-field" data-form="sponsored">
+			<div class="section-title">¿POI Patrocinado?</div>
+			<div class="section-details"><%= @poi.sponsored ? "Si" : "No" %></div>
+		</div>
+		<%= render 'admin/pois/fields/sponsored' %>
+		
+		<div id="published-field" class="row hoverable edit-field" data-form="published">
+			<div class="section-title">¿Ya está publicado?</div>
+			<div class="section-details"><%= @poi.published ? "Si" : "No" %></div>
+		</div>
+		<%= render 'admin/pois/fields/published' %>
+		
+		<div id="published-on-lite-version-field" class="row hoverable edit-field" data-form="published-on-lite-version">
+			<div class="section-title">¿Publicado en la versión light?</div>
+			<div class="section-details"><%= @poi.published_on_lite_version ? "Si" : "No" %></div>
+		</div>
+		<%= render 'admin/pois/fields/published_on_lite_version' %>
+		<br/>
+		<div id="poi-kind-field" class="row hoverable edit-field" data-form="poi-kind">
+			<div class="section-title">Tipo del POI</div>
+			<div class="section-details"><%= @poi.poi_kind.nil? ? "Sin tipo" : @poi.poi_kind.full_name %></div>
+		</div>
+		<%= render 'admin/pois/fields/poi_kind' %>
+		<div id="mode-field" class="row hoverable edit-field" data-form="mode">
+			<div class="section-title">Estilo de POI</div>
+			<div class="section-details"><%= @poi.mode %></div>
+		</div>
+		<%= render 'admin/pois/fields/mode' %>
+		<div id="poi-category-field" class="row hoverable edit-field" data-form="poi-category">
+			<div class="section-title">Categoría de Arte del POI</div>
+			<div class="section-details"><%= @poi.poi_category.nil? ? "Sin categoría" : @poi.poi_category.full_name %></div>
+		</div>
+		<%= render 'admin/pois/fields/poi_category' %>
+		<br/>
+		
+		<div id="main-image-field" class="row hoverable edit-field" data-form="main-image">
+			<div class="section-title">Imagen de Portada</div>
+			<div class="section-details"><%= @poi.image.nil? ? "Sin imagen" : @poi.image.name  %></div>
+		</div>
+		<%= render 'admin/pois/fields/main_image' %>
+	</div>
+	
+	
+</div>

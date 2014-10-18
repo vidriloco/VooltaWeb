@@ -1,11 +1,19 @@
 <ul class="actions">
-	<li><%= link_to 'Añadir nuevo', nil %></li> 
-	<li><%= link_to 'Ver lista', nil %></li>
+	<li><b>Trazos</b></li>
+	<li><%= link_to 'Nuevo', 'javascript:void(0);', "data-form" => "new-path", :id => "new-path-field", :class => "highlighted edit-field" %></li> 
 </ul>
 
+<%= render 'admin/paths/new' %>
+
 <div class="table">
-	<div class="section">Trazos (<%= trip.paths.count %>)</div>
-	<% trip.paths.each do |path| %>
-		<%= render path %>
+	<div class="section">Trazos no asignados a este recorrido (<%= @trip_unassigned_paths.count %>)</div>
+	<% @trip_unassigned_paths.each do |path| %>
+		<%= render partial: 'admin/paths/path', object: path, locals: { assignable: true } %>
 	<% end %>
+	<div class="highlighted">
+		<div class="section highlighted">Trazos asignados a este recorrido (<%= @trip_assigned_paths.count %>)</div>
+		<% @trip_assigned_paths.each do |path| %>
+			<%= render partial: 'admin/paths/path', object: path, locals: { assignable: false } %>
+		<% end %>
+	</div>
 </div>

@@ -1,0 +1,9 @@
+<div class="fieldset" id="published-form">
+	<p class="main-title">¿Ya está publicado?</p>
+	<%= form_for @poi, url: :pois_admin_update, :method => :put do |f| %>
+		<%= f.check_box :published %>		
+		<div class="submit">
+			<%= link_to 'Cancelar', 'javascript:void(0)', :class => 'hide-field', 'data-form' => 'published' %> <%= f.submit 'Guardar cambios' %>
+		</div>
+	<% end %>
+</div>

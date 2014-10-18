@@ -1,11 +1,26 @@
 .notice, .alert {
-	width: 300px;
+	width: 400px;
 	font-size: 15px;
 	text-align: center;
 	padding: 10px;
 	border-radius: 5px;
 	font-family: 'Open Sans Condensed', sans-serif;
 	margin: 15px auto 15px auto;
+}
+
+h1, h2, h3 {
+	font-family: 'Open Sans Condensed', sans-serif;
+}
+
+.centered {
+	text-align: center;
+}
+
+.highlighted {
+	color: #EC9900 !important;
+	.highlighted {
+		color: #FF4800 !important;
+	}
 }
 
 .notice {
@@ -36,17 +51,22 @@
 		text-align: right;
 	}
 	
+	.map {
+		margin: 10px 0 10px 0;
+		height: 200px;
+		width: 100% !important;
+	}
+	
 	.hoverable {
 		padding: 5px !important;
 		
-		.path-in-map {
-			width: 100% !important;
-			
-			.map {
-				margin: 10px 0 10px 0;
-				height: 200px;
-				width: 100% !important;
-			}
+		.title, .actions {
+			width: 49%;
+			display: inline-block;
+		}
+		
+		.actions {
+			text-align: right;
 		}
 	}
 	
@@ -123,7 +143,7 @@
 		color: #6A6A6A;
 		padding: 5px;
 		
-		> div {
+		> div.half-size {
 			width: 49%;
 			display: inline-block;
 		}
@@ -188,13 +208,13 @@
 			}
 		}
 		
-		.path, .poi {
+		.path, .poi, .content {
 			margin-left: 0px;
 			padding: 5px;
 			
 			p {
 				font-size: 14px;
-				margin: 2px;
+				margin: 0;
 				padding: 0;
 				
 				.status {

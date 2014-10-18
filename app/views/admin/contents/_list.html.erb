@@ -1,0 +1,12 @@
+<ul class="actions">
+	<li><b>Contenidos</b></li>
+	<li><%= link_to 'Nuevo', 'javascript:void(0);', "data-form" => "new-content", :id => "new-content-field", :class => "highlighted edit-field" %></li> 
+</ul>
+
+<%= render partial: 'admin/contents/new', locals: { owner_object_type: owner_object_type, owner_object: owner_object } %>
+
+<div class="table">
+	<% owner_object.contents.order(:order).each do |content| %>
+		<p><%= render partial: 'admin/contents/content', object: content, locals: { owner_object: owner_object, owner_object_type: owner_object_type } %></p>
+	<% end %>
+</div>

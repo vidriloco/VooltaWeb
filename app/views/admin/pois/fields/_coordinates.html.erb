@@ -1,0 +1,11 @@
+<div class="fieldset" id="coordinates-form">
+	<%= form_for @poi, url: :pois_admin_update, :method => :put do |f| %>
+		<p class="main-title">Coordenadas</p>
+		<%= f.text_field :lat, id: 'lat', :class => 'input', placeholder: 'Latitud' %>
+		<%= f.text_field :lon, id: 'lon', :class => 'input', placeholder: 'Longitud' %>
+		
+		<div class="submit">
+			<%= link_to 'Cancelar', 'javascript:void(0)', :class => 'hide-field', 'data-form' => 'coordinates' %> <%= f.submit 'Guardar cambios' %>
+		</div>
+	<% end %>
+</div>

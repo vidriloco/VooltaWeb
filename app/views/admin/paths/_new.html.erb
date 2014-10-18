@@ -1,0 +1,14 @@
+<div class="fieldset" id="new-path-form">
+	<p class="main-title">Nuevo Path</p>
+	<%= form_for Path.new, url: paths_admin_path do |f| %>
+		<%= f.text_field :name, :class => 'input', placeholder: 'Nombre' %>
+		<%= f.text_field :details, :class => 'input', placeholder: 'Detalles' %>
+		<%= f.text_field :thickness, :class => 'input', placeholder: 'Thickness' %>
+		<%= f.text_field :color, :class => 'input', placeholder: 'Color' %>
+		<%= f.text_field :coordinates_vector, :class => 'input', placeholder: 'Vector' %>
+		<%= f.hidden_field :trip_id, :value => @trip.id %>
+		<div class="submit">
+			<%= link_to 'Cancelar', 'javascript:void(0)', :class => 'hide-field', 'data-form' => "new-path" %> <%= f.submit 'Guardar cambios' %>
+		</div>
+	<% end %>
+</div>

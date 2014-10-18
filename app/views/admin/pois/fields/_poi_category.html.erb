@@ -1,0 +1,10 @@
+<div class="fieldset" id="poi-category-form">
+	<p class="main-title">Categoría de Arte del POI</p>
+	<%= form_for @poi, url: :pois_admin_update, :method => :put do |f| %>
+		<% poi_cat = @poi.poi_category.nil? ? nil : @poi.poi_category.id %>
+		<%= f.select :poi_category_id, options_from_collection_for_select(@poi_categories, 'id', 'keyword', poi_cat) %>	
+		<div class="submit">
+			<%= link_to 'Cancelar', 'javascript:void(0)', :class => 'hide-field', 'data-form' => 'poi-category' %> <%= f.submit 'Guardar cambios' %>
+		</div>
+	<% end %>
+</div>

@@ -1,7 +1,7 @@
 <div class="fieldset" id="main-image-form">
 	<p class="main-title">Imagen de portada</p>
-	<%= form_for @trip.main_image, url: images_admin_update_path(@trip.main_image), :method => :put do |f| %>
-		<%= render partial: 'admin/shared/fields/image', locals: { f: f, owner_object_id: @trip.id, owner_object_type: :trip } %>
+	<%= form_for @poi.image, url: images_admin_update_path(@poi.image), :method => :put do |f| %>
+		<%= render partial: 'admin/shared/fields/image', locals: { f: f, owner_object_id: @poi.id, owner_object_type: :poi } %>
 		<div class="submit">
 			<%= link_to 'Cancelar', 'javascript:void(0)', :class => 'hide-field', 'data-form' => 'main-image' %> <%= f.submit 'Guardar cambios' %>
 		</div>

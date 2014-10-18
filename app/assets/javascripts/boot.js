@@ -19,30 +19,46 @@ $(document).ready(function() {
 	});
 	
 	if($.isDefined('#map')) {		
-		
-		var origin = new google.maps.LatLng(parseFloat($('#trip-origin-lat').val()), parseFloat($('#trip-origin-lon').val()));
-		var destination = new google.maps.LatLng(parseFloat($('#trip-final-lat').val()), parseFloat($('#trip-final-lon').val()));
-		
-	  var mapOptions = {
-	    zoom: 12,
-	    center: origin
-	  };
-		
-		var map = new google.maps.Map(document.getElementById('map'), mapOptions);
-		
-		var originMarker = new google.maps.Marker({
-		      position: origin,
-		      map: map,
-		      title: 'Origen',
-					icon: 'http://127.0.0.1:3000/assets/start_route_marker.png'
-		});
-		
-		var destinationMarker = new google.maps.Marker({
-		      position: destination,
-		      map: map,
-		      title: 'Destino',
-					icon: 'http://127.0.0.1:3000/assets/end_route_marker.png'
-		});
+		if($('#map').hasClass('for-trip')) {
+			var origin = new google.maps.LatLng(parseFloat($('#trip-origin-lat').val()), parseFloat($('#trip-origin-lon').val()));
+			var destination = new google.maps.LatLng(parseFloat($('#trip-final-lat').val()), parseFloat($('#trip-final-lon').val()));
+
+		  var mapOptions = {
+		    zoom: 12,
+		    center: origin
+		  };
+
+			var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+			var originMarker = new google.maps.Marker({
+			      position: origin,
+			      map: map,
+			      title: 'Origen',
+						icon: 'http://127.0.0.1:3000/assets/start_route_marker.png'
+			});
+
+			var destinationMarker = new google.maps.Marker({
+			      position: destination,
+			      map: map,
+			      title: 'Destino',
+						icon: 'http://127.0.0.1:3000/assets/end_route_marker.png'
+			});
+		}
+
+		if($('#map').hasClass('for-poi')) {
+			var coordinates = new google.maps.LatLng(parseFloat($('#lat').val()), parseFloat($('#lon').val()));
+			var mapOptions = {
+		    zoom: 16,
+		    center: coordinates
+		  };
+
+			var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+			new google.maps.Marker({
+			      position: coordinates,
+			      map: map,
+			      title: 'Coordinates'
+			});
+		}
 	}
 	
 	$('.edit-field').bind('click', function() {
@@ -61,17 +77,20 @@ $(document).ready(function() {
 		$(this).fadeOut();
 	});
 	
-	$('.map-hoverable').bind('mouseenter', function() {
-		var mapElement = $(this).children('.path-in-map')[0];
-		var mapName = $(mapElement).attr('id').concat('-map');
-		$(mapElement).html('<div id="'+ mapName +'" class="map"></div>');
+	$('.map-toggle').bind('click', function() {
+		var pathID = $(this).attr('data-form');
+		var mapName = pathID.concat("-on-map");
+		
 		var simpleMap = new google.maps.Map(document.getElementById(mapName), mapOptions);
 		
 		var coordinates = [];
-		var coordsVector = $(this).attr('data-path-coordinates').split(',');
+		var coordsVector = $('#'.concat(pathID.concat('-form ').concat(' #path_coordinates_vector')))[0].value.split(',');
+		var color = '#'+$('#'.concat(pathID.concat('-form ').concat(' #path_color')))[0].value;
+		var weight = $('#'.concat(pathID.concat('-form ').concat(' #path_thickness')))[0].value;
 		
 		for(var i = 0 ; i < coordsVector.length ; i++) {
 			var coordinate = coordsVector[i].trim();
+			
 			var lon = coordinate.split(' ')[0];
 			var lat = coordinate.split(' ')[1];
 			coordinates.push(new google.maps.LatLng(lat, lon));
@@ -80,9 +99,9 @@ $(document).ready(function() {
 	  var path = new google.maps.Polyline({
 	    path: coordinates,
 	    geodesic: true,
-	    strokeColor: '#'.concat($(this).attr('data-path-color')),
+	    strokeColor: color,
 	    strokeOpacity: 1.0,
-	    strokeWeight: $(this).attr('data-path-thickness')
+	    strokeWeight: weight
 	  });
 		
 		path.setMap(simpleMap);

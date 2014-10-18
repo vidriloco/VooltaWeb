@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140810002545) do
+ActiveRecord::Schema.define(version: 20141015064113) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 20140810002545) do
     t.datetime "updated_at"
   end
 
-  create_table "path_trips", id: false, force: true do |t|
+  create_table "path_trips", force: true do |t|
     t.integer "path_id"
     t.integer "trip_id"
   end
@@ -91,7 +91,7 @@ ActiveRecord::Schema.define(version: 20140810002545) do
     t.datetime "updated_at"
   end
 
-  create_table "poi_trips", id: false, force: true do |t|
+  create_table "poi_trips", force: true do |t|
     t.integer "poi_id"
     t.integer "trip_id"
   end
@@ -110,6 +110,7 @@ ActiveRecord::Schema.define(version: 20140810002545) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "published_on_lite_version",                                                          default: false
+    t.boolean  "staging"
   end
 
   create_table "slides", force: true do |t|

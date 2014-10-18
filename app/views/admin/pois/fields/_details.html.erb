@@ -1,0 +1,10 @@
+<div class="fieldset" id="details-form">
+	<p class="main-title">Detalles</p>
+	<%= form_for @poi, url: :pois_admin_update, :method => :put do |f| %>
+		<%= f.text_area :details, :class => 'input', :rows => 3, :cols => 75 %>
+		
+		<div class="submit">
+			<%= link_to 'Cancelar', 'javascript:void(0)', :class => 'hide-field', 'data-form' => 'details' %> <%= f.submit 'Guardar cambios' %>
+		</div>
+	<% end %>
+</div>

@@ -1,7 +1,7 @@
 <div class="fieldset" id="background-form">
 	<p class="main-title">Fondo para el recorrido</p>
 	<%= form_for @trip.background_image, url: images_admin_update_path(@trip.background_image), :method => :put do |f| %>
-		<%= render partial: 'admin/trips/fields/image', locals: { f: f, trip_id: @trip.id } %>
+		<%= render partial: 'admin/shared/fields/image', locals: { f: f, owner_object_id: @trip.id, owner_object_type: :trip } %>
 		<div class="submit">
 			<%= link_to 'Cancelar', 'javascript:void(0)', :class => 'hide-field', 'data-form' => 'background' %> <%= f.submit 'Guardar cambios' %>
 		</div>

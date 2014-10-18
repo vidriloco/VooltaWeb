@@ -45,6 +45,7 @@ end
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+gem 'pry'
 gem 'rails_admin'
 gem 'codemirror-rails'
 gem 'friendly_id'

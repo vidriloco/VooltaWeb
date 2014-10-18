@@ -1,0 +1,6 @@
+<% unless flash[:notice].blank? %>
+	<div class="notice dismissable"><%= flash[:notice] %></div>
+<% end %>
+<% unless flash[:alert].blank? %>
+	<div class="alert dismissable"><%= flash[:alert] %></div>
+<% end %>

@@ -1,0 +1,57 @@
+<div class="row content hoverable content-<%= content.id %>">
+	<% if content.route_controls? %>
+		<div class="conceptual-content">
+			<p>Controles de la ruta - <i><%= content.kind.upcase %></i></p>
+		</div>
+	<% elsif content.paragraph? %>
+		<div class="paragraph">
+			<p><%= content.content %> - <i><%= content.kind.upcase %></i></p>
+		</div>
+	<% elsif content.legend? %>
+		<div class="legend">
+			<p><%= content.title %> - <i><%= content.kind.upcase %></i></p>
+		</div>
+	<% elsif content.photograph? %>
+		<div class="photograph">
+			<p><%= content.image.name %> - <i><%= content.kind.upcase %></i></p>
+		</div>
+	<% elsif content.poi_table? %>
+		<div class="conceptual-content">
+			<p><%= content.table_title %> - <i><%= content.kind.upcase %></i></p>
+		</div>
+	<% elsif content.webview? %>
+		<div class="webview">
+			<p><%= content.html_string.safe! %> - <i><%= content.kind.upcase %></i></p>
+		</div>
+	<% end %>
+	<p class="actions">
+		<%= link_to 'Editar', 'javascript:void(0);', :class => "edit-field", :id => "content-#{content.id}-field", "data-form" => "content-#{content.id}" %> 
+		<%= link_to 'Eliminar', contents_admin_delete_path(content), :method => :delete, :confirm => "¿Deseas eliminar este contenido?" %> 
+	</p>
+</div>
+<div class="fieldset" id="content-<%= content.id %>-form">
+	<p class="main-title">Editando <%= content.full_name %></p>
+	<%= form_for content, url: contents_admin_update_path(content), :method => :put do |f| %>
+		
+		<p>Tipo de contenido <%= f.select :kind, Content.kinds %></p>
+
+		<p><%= f.text_field :order, placeholder: 'Orden' %></p>
+		
+		<p><%= f.text_area :content, placeholder: "Contenido del párrafo", cols: 70, rows: 4 %></p>
+		
+		<p><%= f.text_area :title, placeholder: "Titulo" %></p>
+		<p><%= f.text_area :subtitle, placeholder: "Subtitulo" %></p>
+		<p><%= f.text_area :details, placeholder: "Detalles", cols: 70, rows: 4 %></p>
+		
+		
+		<%= f.hidden_field :commentable_id, value: owner_object.id %>
+		<%= f.hidden_field :commentable_type, value: owner_object_type %>
+		
+		<div class="submit">
+			<%= link_to 'Cancelar', 'javascript:void(0)', :class => 'hide-field', 'data-form' => "content-#{content.id}" %> 
+			<%= f.submit 'Guardar cambios' %>
+		</div>
+		
+
+	<% end %>
+</div>

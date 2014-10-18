@@ -1,28 +1,27 @@
-<% unless flash[:notice].blank? %>
-	<div class="notice dismissable"><%= flash[:notice] %></div>
-<% end %>
-<% unless flash[:alert].blank? %>
-	<div class="alert dismissable"><%= flash[:alert] %></div>
-<% end %>
+<%= render partial: 'admin/shared/notifications' %>
+
+<div class="centered">
+	<h2>Detalles del recorrido</h2>
+</div>
 
 <div class="card">
 	<ul class="actions">
-		<li><%= link_to 'Atrás', :back %></li>
+		<li><%= link_to 'Atrás', '/trips-admin' %></li>
 	</ul>
 	
 	<div class="header">
-		<div class="title">
+		<div class="title half-size">
 			<h3 id="title-and-lang-field" class="hoverable edit-field" data-form="title-and-lang"><%= @trip.title %> - <%= @trip.lang %></h3> 
 			<%= render 'admin/trips/fields/title_and_lang' %>
 		</div>
-		<div class="creator">
+		<div class="creator half-size">
 			<p id="creator-info-field" class="hoverable edit-field" data-form="creator-info"><b>por </b> <%= @trip.user.full_name %></p>
 			<%= render 'admin/trips/fields/creator_info' %>
 		</div>
 	</div>
 	
 	<div class="sub-header">
-		<div id="map"></div>
+		<div id="map" class="for-trip"></div>
 		<div class="coordinates">
 			<div class="toggler">
 				<%= link_to 'Editar coordenadas', 'javascript:void(0)', :class => 'edit-field', id: 'coordinates-field', 'data-form' => 'coordinates' %>
@@ -88,11 +87,15 @@
 		
 	</div>
 </div>
-	
+
 <div class="card">
-	<%= render partial: 'admin/paths/list', locals: { trip: @trip} %>	
+	<%= render partial: 'admin/contents/list', locals: { owner_object: @trip, owner_object_type: :trip } %>
 </div>
 
 <div class="card">
-	<%= render partial: 'admin/pois/list', locals: { trip: @trip} %>
+	<%= render partial: 'admin/paths/list', locals: { trip: @trip } %>	
+</div>
+
+<div class="card">
+	<%= render partial: 'admin/pois/list', locals: { trip: @trip } %>
 </div>

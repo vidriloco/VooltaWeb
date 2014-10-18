@@ -8,6 +8,7 @@ class CreateTrips < ActiveRecord::Migration
       t.string        :complexity
       t.integer       :background_image_id
       t.integer       :cost, :default => 0
+      # If false, this field makes the trip to appear with a "soon" label on the top
       t.boolean       :available
       t.integer       :main_image_id
       t.integer       :user_id

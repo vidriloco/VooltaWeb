@@ -1,0 +1,9 @@
+<div class="fieldset" id="sponsored-form">
+	<p class="main-title">¿POI Patrocinado?</p>
+	<%= form_for @poi, url: :pois_admin_update, :method => :put do |f| %>
+		<%= f.check_box :sponsored %>		
+		<div class="submit">
+			<%= link_to 'Cancelar', 'javascript:void(0)', :class => 'hide-field', 'data-form' => 'sponsored' %> <%= f.submit 'Guardar cambios' %>
+		</div>
+	<% end %>
+</div>

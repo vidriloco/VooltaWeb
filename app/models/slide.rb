@@ -4,9 +4,12 @@ class Slide < ActiveRecord::Base
   
   after_save      :update_trips_checksum
   after_destroy   :update_trips_checksum
-    
-  rails_admin do         
+  
+  scope :staged_poi, -> { joins(:poi).where('pois.staging = TRUE') }
+  
+  rails_admin do
     list do
+      scopes [:staged_poi, nil]
       field :id
       field :lang
       field :title_

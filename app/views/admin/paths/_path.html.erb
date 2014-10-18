@@ -1,3 +1,15 @@
+<div class="row path hoverable">
+	<p class="title"><%= path.name %></p>
+	<p class="actions">
+		<% if assignable %>
+			<%= link_to 'Ligar', path_trips_admin_path(path, @trip.id), :method => :post %> 
+		<% else %>
+			<%= link_to 'Desligar', path_trips_admin_delete_path(path, @trip.id), :method => :delete %> 
+		<% end %>
+		<%= link_to 'Editar', 'javascript:void(0);', :class => "edit-field map-toggle", :id => "path-#{path.id}-field", "data-form" => "path-#{path.id}" %> 
+		<%= link_to 'Eliminar', paths_admin_delete_path(path), :method => :delete, :confirm => "¿Deseas eliminar este recorrido?" %> 
+	</p>
+</div>
 <div class="fieldset" id="path-<%= path.id %>-form">
 	<p class="main-title">Editando <%= path.name %></p>
 	<%= form_for path, url: paths_admin_update_path(path), :method => :put do |f| %>
@@ -9,15 +21,13 @@
 		</div>
 		<%= f.text_field :coordinates_vector, :class => 'input', placeholder: 'Vector' %>
 		<%= f.hidden_field :trip_id, :value => @trip.id %>
+		<div class="map" id="path-<%= path.id %>-on-map"></div>
 		<div class="submit">
-			<%= link_to 'Cancelar', 'javascript:void(0)', :class => 'hide-field', 'data-form' => "path-#{path.id}" %> <%= f.submit 'Guardar cambios' %>
+			<%= link_to 'Cancelar', 'javascript:void(0)', :class => 'hide-field', 'data-form' => "path-#{path.id}" %> 
+			<%= f.submit 'Guardar cambios' %>
 		</div>
+		
+
 	<% end %>
 </div>
-<div class="row path hoverable map-hoverable" data-path-coordinates="<%= path.coordinates_vector %>" data-path-color="<%= path.color %>" data-path-thickness="<%= path.thickness %>">
-	<div class=" edit-field" id="path-field" data-form="path-<%= path.id %>">
-		<p class="title"><%= path.name %></p>
-		<p class="details"><%= path.details.blank? ? "---" : path.details %></p>
-	</div>
-	<div class="path-in-map" id="path-<%= path.id %>-on-map"></div>
-</div>
+

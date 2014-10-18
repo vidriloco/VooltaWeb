@@ -31,5 +31,10 @@ class Admin::TripsController < ApplicationController
   
   def find_trip
     @trip = Trip.find(params[:id])
+    @trip_assigned_paths = @trip.paths
+    @trip_unassigned_paths = Path.all-@trip_assigned_paths
+    
+    @trip_assigned_pois = @trip.pois
+    @trip_unassigned_pois = Poi.all-@trip_assigned_pois
   end
 end

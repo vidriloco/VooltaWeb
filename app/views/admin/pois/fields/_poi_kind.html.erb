@@ -1,0 +1,9 @@
+<div class="fieldset" id="poi-kind-form">
+	<p class="main-title">Tipo del POI</p>
+	<%= form_for @poi, url: :pois_admin_update, :method => :put do |f| %>
+		<%= f.select :poi_kind_id, options_from_collection_for_select(@poi_kinds, 'id', 'keyword', @poi.poi_kind.id) %>	
+		<div class="submit">
+			<%= link_to 'Cancelar', 'javascript:void(0)', :class => 'hide-field', 'data-form' => 'poi-kind' %> <%= f.submit 'Guardar cambios' %>
+		</div>
+	<% end %>
+</div>

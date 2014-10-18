@@ -1,0 +1,10 @@
+<div class="fieldset" id="new-content-form">
+	<p class="main-title">Nuevo Contenido</p>
+	<%= form_for Content.new, url: contents_admin_path do |f| %>
+
+		<%= f.hidden_field owner_object_type.to_s.concat('_id'), :value => owner_object.id %>
+		<div class="submit">
+			<%= link_to 'Cancelar', 'javascript:void(0)', :class => 'hide-field', 'data-form' => "new-content" %> <%= f.submit 'Guardar cambios' %>
+		</div>
+	<% end %>
+</div>

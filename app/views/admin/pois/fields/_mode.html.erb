@@ -1,0 +1,9 @@
+<div class="fieldset" id="mode-form">
+	<p class="main-title">Modo</p>
+	<%= form_for @poi, url: :pois_admin_update, :method => :put do |f| %>
+		<%= f.select :mode, options_for_select(@poi_modes, @poi.mode) %>
+		<div class="submit">
+			<%= link_to 'Cancelar', 'javascript:void(0)', :class => 'hide-field', 'data-form' => 'mode' %> <%= f.submit 'Guardar cambios' %>
+		</div>
+	<% end %>
+</div>

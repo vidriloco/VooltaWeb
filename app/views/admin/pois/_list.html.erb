@@ -1,13 +1,17 @@
 <ul class="actions">
-	<li><%= link_to 'Añadir nuevo', nil %></li> 
-	<li><%= link_to 'Ver lista', nil %></li>
+	<li><b>Puntos de interés</b></li>
+	<li><%= link_to 'Nuevo', '/admin/poi/new', target: '_blank', :class => "highlighted" %></li> 
 </ul>
 
 <div class="table">
-	<div class="section">Pois (<%= trip.pois.count %>)</div>
-	<% trip.pois.each do |poi| %>
-		<div class="poi">
-			<p><span class="status"><%= poi.published ? 'Publicado' : 'Sin publicar' %> </span><%= poi.title %> - <span class="kind"><%= poi.poi_kind.keyword %></span></p>
-		</div>
+	<div class="section">POIs no asignados a este recorrido (<%= @trip_unassigned_pois.count %>)</div>
+	<% @trip_unassigned_pois.each do |poi| %>
+		<%= render partial: 'admin/pois/poi', object: poi, locals: { assignable: true } %>
 	<% end %>
+	<div class="highlighted">
+		<div class="section highlighted">POIs asignados a este recorrido (<%= @trip_assigned_pois.count %>)</div>
+		<% @trip_assigned_pois.each do |poi| %>
+			<%= render partial: 'admin/pois/poi', object: poi, locals: { assignable: false } %>
+		<% end %>
+	</div>
 </div>

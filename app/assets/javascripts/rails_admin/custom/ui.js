@@ -34,6 +34,7 @@ $(document).on('rails_admin.dom_ready', function(){
 	if($.isDefined('#poi_mode_field')) {
 		$('#poi_mode').on('change', function() {
 			var value = $(this).text();
+			alert(value);
 			$('.control-group').hide();
 			if(value == "slide_based") {
 				$('#poi_image_id_field').fadeIn();

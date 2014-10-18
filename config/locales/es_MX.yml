@@ -2,6 +2,40 @@ es_MX:
   options:
     true: "Sí"
     false: "No"
+  paths:
+    create:
+      success: "Nuevo trazo añadido exitosamente"
+      failure: "No fué posible añadir el trazo"
+    update:
+      success: "El trazo fue modificado correctamente"
+      failure: "No fué posible actualizar el trazo"
+    destroy:
+      success: "El trazo fue eliminado"
+      failure: "No fué posible eliminar el trazo"
+  path_trips:
+    create:
+      success: "Trazo ligado a recorrido exitosamente"
+      failure: "No fué posible ligar el trazo al recorrido"
+    destroy:
+      success: "Trazo desligado a recorrido exitosamente"
+      failure: "No fué posible desligar el trazo al recorrido"
+  poi_trips:
+    create:
+      success: "POI ligado a recorrido exitosamente"
+      failure: "No fué posible ligar el POI al recorrido"
+    destroy:
+      success: "POI desligado a recorrido exitosamente"
+      failure: "No fué posible desligar el POI al recorrido"
+  pois:
+    create:
+      success: "Nuevo POI añadido exitosamente"
+      failure: "No fué posible añadir el POI"
+    update:
+      success: "El POI fue modificado correctamente"
+      failure: "No fué posible actualizar el POI"
+    destroy:
+      success: "El POI fue eliminado"
+      failure: "No fué posible eliminar el POI"
   trips:
     update:
       success: "Los datos de la ruta fueron actualizadados correctamente"

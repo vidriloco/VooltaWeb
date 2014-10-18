@@ -14,6 +14,16 @@ class Image < ActiveRecord::Base
   before_save       :update_checksum
   after_save        :regenerate_cache
   
+  scope :staged_trip_main_images, -> { joins(:main_images).where('trips.staging = TRUE') }
+  scope :staged_background_images, -> { joins(:background_images).where('trips.staging = TRUE') }
+  scope :staged_pois, -> { joins(:pois).where('pois.staging = TRUE') }
+  
+  rails_admin do         
+    list do
+      scopes [:staged_trip_main_images, :staged_background_images, :staged_pois, nil]
+    end
+  end
+  
   @@precompiled_json=nil
   def self.regenerate_cache_inventory
     @@precompiled_json = ActiveModel::ArraySerializer.new(Image.where(:image_type => ["background", "icon"]), each_serializer: ImageInventorySerializer).to_json

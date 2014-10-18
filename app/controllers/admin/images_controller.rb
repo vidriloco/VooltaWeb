@@ -11,7 +11,8 @@ class Admin::ImagesController < ApplicationController
       flash[:alert] = I18n.t('images.update.failure')
     end
     
-    redirect_to trips_admin_path(params[:image][:trip_id])
+    redirect_to trips_admin_path(params[:image][:object_id]) if params[:image][:object_type].eql?("trip")
+    redirect_to pois_admin_path(params[:image][:object_id]) if params[:image][:object_type].eql?("poi")
   end
   
   protected

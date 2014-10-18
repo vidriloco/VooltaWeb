@@ -1,0 +1,17 @@
+<div class="row poi hoverable">
+	<p class="title">
+		<%= poi.title %> - <span class="kind"><%= poi.poi_kind.keyword %></span> - 
+		<span class="lang"><%= poi.poi_kind.lang %></span>
+	</p>
+	<p class="actions">
+		<% if assignable %>
+			<%= link_to 'Ligar', poi_trips_admin_path(poi, @trip.id), :method => :post %> 
+		<% else %>
+			<%= link_to 'Desligar', poi_trips_admin_delete_path(poi, @trip.id), :method => :delete %> 
+		<% end %>
+		<%= link_to 'Editar', pois_admin_path(poi) %> 
+		<%= link_to 'Eliminar', pois_admin_delete_path(poi), :method => :delete, :confirm => "¿Deseas eliminar este recorrido?" %> 
+		<span class="status"><%= poi.published ? 'Publicado' : 'Sin publicar' %> </span>
+	</p>
+</div>
+

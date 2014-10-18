@@ -19,7 +19,10 @@ class Trip < ActiveRecord::Base
   
   attr_accessor :origin_lat, :origin_lon, :final_lon, :final_lat
   
-  rails_admin do         
+  scope :staged, -> { where(staging: true) }
+  
+  rails_admin do    
+       
     edit do
       include_all_fields
       exclude_fields :created_at, :updated_at, :checksum
@@ -31,6 +34,7 @@ class Trip < ActiveRecord::Base
     end
     
     list do
+      scopes [:staged, nil]  
       field :lang
       field :full_name
       field :trip_resource

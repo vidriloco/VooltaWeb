@@ -1,0 +1,9 @@
+<div class="fieldset" id="listed-form">
+	<p class="main-title">¿Listado en la portada del recorrido?</p>
+	<%= form_for @poi, url: :pois_admin_update, :method => :put do |f| %>
+		<%= f.check_box :listed %>		
+		<div class="submit">
+			<%= link_to 'Cancelar', 'javascript:void(0)', :class => 'hide-field', 'data-form' => 'listed' %> <%= f.submit 'Guardar cambios' %>
+		</div>
+	<% end %>
+</div>

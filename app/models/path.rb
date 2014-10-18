@@ -5,8 +5,12 @@ class Path < ActiveRecord::Base
   
   before_save :transform_coordinates
   
+  #before_destroy { PathTrip.where(path_id: id).destroy_all }
+  scope :staged_trip, -> { joins(:trips).distinct('path_trips.trip_id').where('trips.staging = TRUE') }
+  
   rails_admin do         
     list do
+      scopes [:staged_trip]
       field :id
       field :name
       field :listed_on_trips
