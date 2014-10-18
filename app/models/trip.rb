@@ -45,9 +45,9 @@ class Trip < ActiveRecord::Base
   end
   
   def self.find_all_with(publishing_mode)
-    # Shows all trips: staging, the ones for the lite version and for the pro versions as well
+    # Shows all staging trips which are either on the lite version and on the pro version
     if(publishing_mode == :staging)
-      all.order(updated_at: :desc).order(available: :desc)
+      all.order(updated_at: :desc).order(available: :desc).where(:staging => true)
     # Shows all trips on lite which are not staging
     elsif(publishing_mode == :lite)
       all.order(updated_at: :desc).order(available: :desc).where(:published_on_lite_version => true, :staging => false)
