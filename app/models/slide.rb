@@ -40,6 +40,7 @@ class Slide < ActiveRecord::Base
     
   protected 
   def update_trips_checksum
+    image.destroy
     poi.update_trips
   end
 end
