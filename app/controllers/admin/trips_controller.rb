@@ -23,12 +23,30 @@ class Admin::TripsController < ApplicationController
     redirect_to trips_admin_path(@trip)
   end
   
+  def duplicate
+    @trip = Trip.find(params[:id])
+    @trip.duplicate
+    redirect_to trips_admin_path(@trip)
+  end
+  
+  def destroy
+    @trip = Trip.find(params[:id])
+    @trip.destroy
+    redirect_to trips_admin_path(@trip)
+  end
+  
+  def hard_destroy
+    @trip = Trip.find(params[:id])
+    @trip.hard_destroy
+    redirect_to trips_admin_path(@trip)
+  end
+  
   protected
   
   def trip_params
      params[:trip].permit(:title, :details, :cost, :lang, :complexity, :origin_lon, :origin_lat, :final_lat, :final_lon, :published_on_lite_version, :staging, :available, :distance)
   end
-  
+    
   def find_trip
     @trip = Trip.find(params[:id])
     @trip_assigned_paths = @trip.paths

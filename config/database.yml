@@ -9,11 +9,14 @@ development:
   password: <%= ENV['PSQL_PASSWD'] %>
 
 test:
+  host: localhost
   adapter: postgis
-  database: bungy_test
+  encoding: unicode
+  database: voolta_test
   pool: 5
   username: postgres
-
+  password: <%= ENV['PSQL_PASSWD'] %>
+  
 production:
   database: voolta
   adapter: postgis

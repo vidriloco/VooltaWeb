@@ -4,8 +4,17 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+simple:
+  trip_resource: es
+  distance: "40 km"
+  title: "Paseo dominical"
+  details: "Un paseo super mono en la calle mas bonita de la Ciudad de Mexico"
+  complexity: "Medium"
+  background_image: simple_background
+  cost: "10 MXN"
+  available: true
+  main_image: main_image
+  user: pepe
+  lang: "es"
+  origin_coordinate: "POINT(19.323 -99.232)"
+  end_coordinate: "POINT(19.313 -99.132)"

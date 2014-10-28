@@ -19,6 +19,9 @@ HoopMan::Application.routes.draw do
   get '/trips-admin/:id' => 'admin/trips#show', as: 'trips_admin'
   put '/trips-admin/:id' => 'admin/trips#update', as: 'trips_admin_update'
   get '/trips-admin/:id/edit' => 'admin/trips#edit', as: 'trips_admin_edit'
+  get '/trips-admin/:id/duplicate' => 'admin/trips#duplicate', as: 'duplicate_trips_admin'
+  delete '/trips-admin/:id' => 'admin/trips#destroy', as: 'delete_trips_admin'
+  delete '/trips-admin/:id/hard_destroy' => 'admin/trips#hard_destroy', as: 'delete_hard_trips_admin'
   
   put '/users-admin/:id' => 'admin/users#update', as: 'users_admin_update'
   put '/images-admin/:id' => 'admin/images#update', as: 'images_admin_update'

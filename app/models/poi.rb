@@ -5,9 +5,9 @@ class Poi < ActiveRecord::Base
   belongs_to :poi_category
   belongs_to :poi_kind
   belongs_to :image
-  has_many :contents, as: :contentable, :inverse_of => :contentable
   
-  has_many :slides
+  has_many :contents, as: :contentable, inverse_of: :contentable, dependent: :destroy
+  has_many :slides, dependent: :destroy
   
   attr_accessor :lat, :lon
   before_validation :update_coordinates
@@ -38,6 +38,25 @@ class Poi < ActiveRecord::Base
       field :listed
       field :staging
     end
+  end
+  
+  def duplicate_with_children_and_save
+    new_poi=self.dup
+    new_poi.save
+    
+    self.contents.each do |content|
+      new_content=content.dup
+      new_content.contentable_id = new_poi.id
+      new_content.save
+    end
+    
+    self.slides.each do |slide|
+      new_slide=slide.dup
+      new_slide.poi_id = new_poi.id
+      new_slide.save
+    end
+    
+    new_poi
   end
   
   def listed_on_trips

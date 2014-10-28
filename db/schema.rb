@@ -63,6 +63,8 @@ ActiveRecord::Schema.define(version: 20141015064113) do
     t.integer "trip_id"
   end
 
+  add_index "path_trips", ["path_id", "trip_id"], :name => "index_path_trips_on_path_id_and_trip_id", :unique => true
+
   create_table "paths", force: true do |t|
     t.integer  "thickness"
     t.string   "color"

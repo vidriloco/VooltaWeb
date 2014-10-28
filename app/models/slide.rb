@@ -3,7 +3,6 @@ class Slide < ActiveRecord::Base
   belongs_to :image
   
   after_save      :update_trips_checksum
-  after_destroy   :update_trips_checksum
   
   scope :staged_poi, -> { joins(:poi).where('pois.staging = TRUE') }
   
@@ -40,7 +39,6 @@ class Slide < ActiveRecord::Base
     
   protected 
   def update_trips_checksum
-    image.destroy
     poi.update_trips
   end
 end

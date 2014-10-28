@@ -3,7 +3,7 @@ class Trip < ActiveRecord::Base
   has_and_belongs_to_many :paths, class_name: "Path", join_table: :path_trips
   has_and_belongs_to_many :pois, class_name: "Poi", join_table: :poi_trips
   
-  has_many :contents, as: :contentable, :inverse_of => :contentable
+  has_many :contents, as: :contentable, inverse_of: :contentable, dependent: :destroy
   
   belongs_to :main_image, class_name: 'Image', foreign_key: 'main_image_id'
   belongs_to :background_image, class_name: 'Image', foreign_key: 'background_image_id'
@@ -62,6 +62,44 @@ class Trip < ActiveRecord::Base
     
     rescue ActiveRecord::RecordNotFound
       return nil
+  end
+  
+  def duplicate
+    trip=self.dup
+    trip.save
+    
+    self.paths.each do |path|
+      new_path=path.dup
+      new_path.save
+      PathTrip.create(path: new_path, trip: trip)
+    end
+    
+    self.pois.each do |poi|
+      new_poi=poi.duplicate_with_children_and_save
+      PoiTrip.create(poi: new_poi, trip: trip)
+    end
+    
+    self.contents.each do |content|
+      new_content=content.dup
+      new_content.contentable_id = trip.id
+      new_content.save
+    end
+    
+    trip
+  end
+  
+  def hard_destroy
+    self.paths.each do |path|
+      PathTrip.where(path_id: path.id, trip_id: self.id).destroy_all
+      path.destroy
+    end
+    
+    self.pois.each do |poi|
+      PoiTrip.where(poi_id: poi.id, trip_id: self.id).destroy_all
+      poi.destroy
+    end
+    
+    self.destroy
   end
   
   def origin_lat

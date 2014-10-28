@@ -4,8 +4,14 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
+simple_background:
+  url: "www.some-url.com"
+  name: "A background image"
+  image_type: "Background"
 # column: value
 #
-two: {}
+main_image:
+  url: "www.another-url.com"
+  name: "A main image"
+  image_type: "Photograph"
 #  column: value
