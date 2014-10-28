@@ -26,19 +26,19 @@ class Admin::TripsController < ApplicationController
   def duplicate
     @trip = Trip.find(params[:id])
     @trip.duplicate
-    redirect_to trips_admin_path(@trip)
+    redirect_to trips_admin_path
   end
   
   def destroy
     @trip = Trip.find(params[:id])
     @trip.destroy
-    redirect_to trips_admin_path(@trip)
+    redirect_to trips_admin_path
   end
   
   def hard_destroy
     @trip = Trip.find(params[:id])
     @trip.hard_destroy
-    redirect_to trips_admin_path(@trip)
+    redirect_to trips_admin_path
   end
   
   protected
