@@ -122,12 +122,16 @@ class Trip < ActiveRecord::Base
     end_coordinate.lon unless end_coordinate.nil?
   end
       
-  def self.complexity_enum
+  def self.complexity_enum_alternate
     {
       es: ["Difícil", "Media", "Fácil"], 
       en: ["Hard", "Medium", "Easy"]
     }
-  end    
+  end   
+  
+  def self.complexity_enum
+    ["Difícil", "Media", "Fácil", "Hard", "Medium", "Easy"]
+  end 
       
   def self.lang_enum
     ["es", "en"]
